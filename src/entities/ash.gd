@@ -50,7 +50,7 @@ func jumping(delta) -> void:
 		if velocity.y < 0:
 			velocity.y = 0.
 		velocity.y += gravity/10. * delta
-	else: 
+	else:
 		is_jumping = false
 		collisionShape.set_deferred("disabled", false)
 	
