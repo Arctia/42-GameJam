@@ -3,18 +3,25 @@ extends CharacterBody2D
 signal setup_ashes(total_ash, current_ash)
 signal consume_ashes(new_value)
 
+const JUMP_FORCE_STEPS : float = 5.
+
 @export var ACC:float = 0
 @export var MAX_SPEED:float = 400
-@export var JUMP:float = -700
+@export var JUMP:float = -500
 var FRICTION:float
 var moving:bool = false
 var idle:float = 0.0
+
+@onready var sprite = $Sprite2D
+@onready var collisionShape = $CollisionShape2D
+@onready var collapsedCShape = $CollapsedCollisionShape
 
 @export var ashes_full:float = 100000
 @export var ashes_amount:float = 100000
 
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
 var is_jumping:bool = true
+var is_ducking:bool = false
 
 func _ready():
 	FRICTION = ACC
@@ -22,6 +29,7 @@ func _ready():
 func _physics_process(delta):
 	if self.move(delta): self.reduce_ashes(delta)
 	self.jumping(delta)
+	self.ducking()
 	self.check_anim()
 	self.rotating(delta)
 	move_and_slide()
@@ -35,12 +43,38 @@ func move(_delta) -> bool:
 	if velocity.x != 0: return true
 	return false
 
+
 func jumping(delta) -> void:
-	if not is_on_floor(): velocity.y += gravity * delta
-	elif Input.is_action_just_pressed("jump") and self.ashes_amount > 0: 
-		velocity.y += JUMP
-		self.ashes_amount -= abs(JUMP) * delta
-		consume_ashes.emit(self.ashes_amount)
+	if not is_on_floor() and is_jumping and not is_on_wall(): velocity.y += gravity * delta
+	elif is_jumping and is_on_wall_only():
+		if velocity.y < 0:
+			velocity.y = 0.
+		velocity.y += gravity/10. * delta
+	else: 
+		is_jumping = false
+		collisionShape.set_deferred("disabled", false)
+	
+	if Input.is_action_pressed("jump") and not is_jumping and not is_ducking: #and self.ashes_amount > 0: 
+		velocity.y += JUMP/JUMP_FORCE_STEPS
+		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS): is_jumping = true
+		if not collisionShape.disabled:
+			collisionShape.set_deferred("disabled", true)
+#		self.ashes_amount -= abs(JUMP) * delta
+#		consume_ashes.emit(self.ashes_amount)
+	elif Input.is_action_just_released("jump"): is_jumping = true
+	if is_jumping:
+		collisionShape.set_deferred("disabled", true)
+
+
+func ducking() -> void:
+	if Input.is_action_pressed("duck"):
+		collisionShape.set_deferred("disabled", true)
+		is_jumping = true
+	else:
+		if collisionShape.disabled and not is_jumping:
+			collisionShape.set_deferred("disabled", false)
+	is_ducking = collisionShape.disabled
+	
 
 func reduce_ashes(delta) -> void:
 	if self.ashes_amount > 0: 
@@ -52,10 +86,10 @@ func rotating(delta) -> void:
 	if velocity.x != 0:
 		self.idle = 0
 		var grad:float = velocity.x / 100
-		self.rotate(deg_to_rad(grad))
+		sprite.rotate(deg_to_rad(grad))
 	else:
 		self.idle += delta
-		self.rotation = move_toward(self.rotation, 0.0, delta * 3)
+		sprite.rotation = move_toward(sprite.rotation, 0.0, delta * 3)
 
 func check_anim() -> void:
 	if velocity == Vector2(0,0): self.open_eyes()
