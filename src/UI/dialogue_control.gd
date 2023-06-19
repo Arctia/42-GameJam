@@ -20,5 +20,15 @@ func _process(dt):
 		i += 1
 		sec = 0
 	
-	if dialogue == self.text:
-		reach_the_end.emit()
+	if dialogue == self.text: reach_the_end.emit()
+
+func reset(dia:String):
+	self.dialogue = dia
+	self.text = ""
+	self.i = 0
+	self.sec = 0
+
+func skip() -> void:
+	self.text = dialogue
+	reach_the_end.emit()
+	

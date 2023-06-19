@@ -1,4 +1,7 @@
 extends Control
 
 func _start_game():
-	pass # Replace with function body.
+	$AnimationPlayer.play("flashing")
+
+func _on_animation_player_animation_finished(anim_name):
+	get_tree().change_scene_to_file("res://src/UI/beginning.tscn")
