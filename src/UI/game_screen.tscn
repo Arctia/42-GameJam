@@ -10,28 +10,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0784314, 0.0156863, 0.0470588, 1)
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="GameMap" parent="Node2D" instance=ExtResource("1_h5cua")]
-position = Vector2(228, 617)
+position = Vector2(229, 617)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 200.0
-grow_horizontal = 2
-color = Color(0.0784314, 0.0156863, 0.0470588, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
 layout_mode = 1
