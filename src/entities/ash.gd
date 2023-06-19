@@ -14,7 +14,6 @@ var idle:float = 0.0
 
 @onready var sprite = $Sprite2D
 @onready var collisionShape = $CollisionShape2D
-@onready var collapsedCShape = $CollapsedCollisionShape
 
 @export var ashes_full:float = 100000
 @export var ashes_amount:float = 100000
@@ -45,34 +44,40 @@ func move(_delta) -> bool:
 
 
 func jumping(delta) -> void:
-	if not is_on_floor() and is_jumping and not is_on_wall(): velocity.y += gravity * delta
+	if not is_on_floor() and not is_on_wall_only(): velocity.y += gravity * delta
 	elif is_jumping and is_on_wall_only():
 		if velocity.y < 0:
 			velocity.y = 0.
 		velocity.y += gravity/10. * delta
 	else: 
 		is_jumping = false
-		collisionShape.set_deferred("disabled", false)
+		collisionShape.set_deferred("scale", Vector2(1., 1.))
 	
+	if is_on_wall_only():
+		is_jumping = false
 	if Input.is_action_pressed("jump") and not is_jumping and not is_ducking: #and self.ashes_amount > 0: 
-		velocity.y += JUMP/JUMP_FORCE_STEPS
+		if is_on_wall_only():
+			velocity.x += JUMP 
+			print(velocity)
+		else:
+			velocity.y += JUMP/JUMP_FORCE_STEPS
 		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS): is_jumping = true
 		if not collisionShape.disabled:
-			collisionShape.set_deferred("disabled", true)
+			collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
 #		self.ashes_amount -= abs(JUMP) * delta
 #		consume_ashes.emit(self.ashes_amount)
 	elif Input.is_action_just_released("jump"): is_jumping = true
 	if is_jumping:
-		collisionShape.set_deferred("disabled", true)
+		collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
 
 
 func ducking() -> void:
 	if Input.is_action_pressed("duck"):
-		collisionShape.set_deferred("disabled", true)
+		collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
 		is_jumping = true
 	else:
 		if collisionShape.disabled and not is_jumping:
-			collisionShape.set_deferred("disabled", false)
+			collisionShape.set_deferred("scale", Vector2(1., 1.))
 	is_ducking = collisionShape.disabled
 	
 

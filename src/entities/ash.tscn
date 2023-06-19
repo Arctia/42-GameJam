@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=8 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
@@ -18,14 +18,12 @@ noise = SubResource("FastNoiseLite_3u4q0")
 shader = ExtResource("1_7el0b")
 shader_parameter/noise = SubResource("NoiseTexture2D_skocy")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bunyr"]
-radius = 8.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmren"]
 custom_solver_bias = 1.0
 radius = 28.0
 
 [node name="ash" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
 floor_stop_on_slope = false
 script = ExtResource("1_ekyna")
 
@@ -34,9 +32,6 @@ material = SubResource("ShaderMaterial_y70k8")
 texture = ExtResource("2_x26s7")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-
-[node name="CollapsedCollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_bunyr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hmren")
