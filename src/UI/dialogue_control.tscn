@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxg4t871uddd"]
+
+[ext_resource type="Theme" uid="uid://csi604a0328au" path="res://src/theme.tres" id="1_1slkq"]
+[ext_resource type="Script" path="res://src/UI/dialogue_control.gd" id="1_ryfb7"]
+
+[node name="DialogueControl" type="Label"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_right = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_1slkq")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+script = ExtResource("1_ryfb7")
+dialogue = "hi, I'm here to discuss something. Rovent... Raise and fulfill your duty."
+frame_rate = 0.06
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_right = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0901961, 0.0901961, 1)
