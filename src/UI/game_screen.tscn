@@ -101,6 +101,12 @@ unique_name_in_owner = true
 position = Vector2(324, -1278)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
+ACC = 30.0
+MAX_SPEED = 200.0
+JUMP = -500.0
+ashes_full = 100000.0
+consume = 1.0
+lives = 5
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1

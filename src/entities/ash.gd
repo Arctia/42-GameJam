@@ -8,6 +8,7 @@ const JUMP_FORCE_STEPS : float = 5.
 @export var ACC:float = 30
 @export var MAX_SPEED:float = 200
 @export var JUMP:float = -500
+
 var FRICTION:float
 var moving:bool = false
 var idle:float = 0.0
@@ -15,6 +16,7 @@ var idle:float = 0.0
 @onready var sprite = $Sprite2D
 @onready var eyes = $Eyes
 @onready var collisionShape = $CollisionShape2D
+@onready var worldChecker = $WorldChecker
 
 @export var ashes_full:float = 100000
 #@export var ashes_amount:float = 100000
@@ -27,7 +29,13 @@ var is_ducking:bool = false
 var can_fall:bool = true
 var xaxis:int = 0
 
+enum {
+	FLR_NORMAL = 0,
+	FLR_ICE
+}
+
 var world_fric = FRICTION
+var floor_type = FLR_NORMAL
 
 func _ready():
 	FRICTION = ACC
@@ -44,10 +52,23 @@ func move(_delta) -> bool:
 	xaxis = Input.get_axis("move_left", "move_right")
 	
 	var curr_acc = ACC
+
+	if worldChecker.get_overlapping_areas().size() > 0:
+		for area in worldChecker.get_overlapping_areas():
+			if "ice" in area.name:
+				floor_type = FLR_ICE
+				break
+	else:
+		floor_type = FLR_NORMAL
+	if floor_type == FLR_NORMAL:
+		world_fric = FRICTION / 2.
+	elif floor_type == FLR_ICE:
+		world_fric = 0
+		curr_acc = ACC / 10.
 	if not is_on_floor():
-		curr_acc /= 2.
-		world_fric /= 10.
-	if xaxis and self.ashes_amount > 0: velocity.x += xaxis * ACC
+		curr_acc = ACC / 2.
+		world_fric = FRICTION / 10.
+	if xaxis and self.ashes_amount > 0: velocity.x += xaxis * curr_acc
 	else: velocity.x = move_toward(velocity.x, 0, world_fric)
 	velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
 	if velocity.x != 0: return true
@@ -168,3 +189,4 @@ func _get_hit(damage:float) -> void:
 
 func _on_timer_timeout():
 	self.invincible = false
+
