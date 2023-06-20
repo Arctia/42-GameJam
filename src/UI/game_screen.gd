@@ -61,7 +61,8 @@ func _move_background() -> void:
 	var tweens:Array = [create_tween(), create_tween(), create_tween(), create_tween()]
 	
 	for el in bg_arr:
-		tweens[i - 1].tween_property(el, "position:y", el.position.y + par_var / i, 0.6)
+		@warning_ignore("integer_division")
+		tweens[i - 1].tween_property(el, "position:y", int(el.position.y * 1.0 + par_var / i), 0.6)
 		tweens[i - 1].set_ease(Tween.EASE_IN)
 		tweens[i - 1].set_trans(Tween.TRANS_SINE)
 		tweens[i - 1].play()

@@ -49,6 +49,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func move(_delta) -> bool:
+	@warning_ignore("narrowing_conversion")
 	xaxis = Input.get_axis("move_left", "move_right")
 	
 	var curr_acc = ACC
