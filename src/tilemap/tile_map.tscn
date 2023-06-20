@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://oxcc2vt1vgjl" path="res://assets/tileset/background_00.png" id="1_hujug"]
 [ext_resource type="Texture2D" uid="uid://xra3qvtei0gj" path="res://assets/tileset/background_01.png" id="2_s8ktv"]
 [ext_resource type="Texture2D" uid="uid://cht7j5nxa1swc" path="res://assets/tileset/background_02.png" id="3_y0tuo"]
-[ext_resource type="Texture2D" uid="uid://chxwdd3ovferv" path="res://assets/tutorial/Tutorial.png" id="4_gfuo3"]
+[ext_resource type="Texture2D" uid="uid://bsaqvij4lm30m" path="res://assets/tutorial/Tutorial.png" id="4_gfuo3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_egyjh"]
 texture = ExtResource("1_hujug")
