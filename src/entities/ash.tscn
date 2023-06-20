@@ -98,7 +98,6 @@ texture = ExtResource("2_x26s7")
 texture = ExtResource("4_6dmeg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CircleShape2D_hmren")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

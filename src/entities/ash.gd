@@ -22,6 +22,7 @@ var idle:float = 0.0
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
 var is_jumping:bool = true
 var is_ducking:bool = false
+var cShapeHalved:bool = false
 
 func _ready():
 	FRICTION = ACC
@@ -29,7 +30,7 @@ func _ready():
 func _physics_process(delta):
 	if self.move(delta): self._consume(delta)
 	self.jumping(delta)
-	self.ducking()
+#	self.ducking()
 	self.check_anim()
 	self.rotating(delta)
 	move_and_slide()
@@ -52,7 +53,8 @@ func jumping(delta) -> void:
 		velocity.y += gravity/10. * delta
 	else:
 		is_jumping = false
-		collisionShape.set_deferred("scale", Vector2(1., 1.))
+		collisionShape.apply_scale(Vector2(1., 1.))
+		cShapeHalved = false
 	
 	if is_on_wall_only():
 		is_jumping = false
@@ -63,13 +65,15 @@ func jumping(delta) -> void:
 		else:
 			velocity.y += JUMP/JUMP_FORCE_STEPS
 		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS): is_jumping = true
-		if not collisionShape.disabled:
-			collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
+		if not cShapeHalved:
+			collisionShape.apply_scale(Vector2(0.5, 0.5))
+			cShapeHalved = true
 #		self.ashes_amount -= abs(JUMP) * delta
 #		consume_ashes.emit(self.ashes_amount)
 	elif Input.is_action_just_released("jump"): is_jumping = true
 	if is_jumping:
-		collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
+		collisionShape.apply_scale(Vector2(0.5, 0.5))
+		cShapeHalved = false
 
 
 func ducking() -> void:
