@@ -96,6 +96,7 @@ unique_name_in_owner = true
 layout_mode = 1
 
 [node name="DialogueControl" parent="." instance=ExtResource("5_e182c")]
+process_mode = 3
 visible = false
 z_index = 2
 custom_minimum_size = Vector2(540, 600)

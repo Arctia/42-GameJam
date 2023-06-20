@@ -20,7 +20,9 @@ func _process(dt):
 
 func _raise_level():
 	level += 1
-	if level in intermezzi: $DialogueControl._play(intermezzi[level])
+	if level in intermezzi: 
+		$DialogueControl._play(intermezzi[level])
+		self.get_tree().paused = true
 
 # ---------------------------------------------------------------------------- #
 # --- New Level Logic
