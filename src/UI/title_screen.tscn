@@ -66,8 +66,12 @@ layer_0/tile_data = PackedInt32Array(1179661, 983040, 7, 1048588, 917504, 5, 111
 [node name="ash" parent="Node2D" instance=ExtResource("4_pmvk2")]
 position = Vector2(245, 577)
 scale = Vector2(2, 2)
+ACC = 30.0
 MAX_SPEED = 0.0
 JUMP = 0.0
+ashes_full = 100000.0
+consume = 1.0
+lives = 5
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
