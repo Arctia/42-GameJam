@@ -30,3 +30,7 @@ func get_lives(lives:int):
 func get_ashes(amount:int):
 	$LIFE/LifeAct.value = amount
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	get_lives(5)
+	get_act_life(40)
