@@ -53,7 +53,6 @@ func get_which_wall_collided() -> int :
 		elif collision.get_normal().x < 0 and xaxis > 0:
 			return 1
 	return 0
-	
 
 func jumping(delta) -> void:
 	if is_on_wall_only() and xaxis != 0:
