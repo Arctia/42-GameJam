@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5dgmqqaqyfji"]
+[gd_scene load_steps=19 format=3 uid="uid://b5dgmqqaqyfji"]
 
 [ext_resource type="Script" path="res://HUD/hud.gd" id="1_tiwh4"]
 [ext_resource type="Texture2D" uid="uid://8djg14go0nen" path="res://HUD/Sprite-0002.png" id="1_udfon"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b3blqfraaxm5j" path="res://HUD/Commands-0004.png" id="14_3pcgx"]
 [ext_resource type="Texture2D" uid="uid://dcto4am1026qh" path="res://HUD/Commands-0003.png" id="15_02vvx"]
 [ext_resource type="Texture2D" uid="uid://dco75qrxc3s0o" path="res://HUD/Commands-0005.png" id="16_nop38"]
+[ext_resource type="Script" path="res://HUD/TimerValue.gd" id="18_kjtwi"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -36,7 +37,7 @@ offset_right = 340.0
 offset_bottom = 340.0
 scale = Vector2(0.5, 0.5)
 value = 100.0
-fill_mode = 7
+fill_mode = 3
 texture_progress = ExtResource("1_udfon")
 
 [node name="Life1" type="TextureRect" parent="LIFE"]
@@ -95,6 +96,7 @@ offset_right = 248.0
 offset_bottom = 360.0
 grow_horizontal = 0
 scale = Vector2(0.1, 0.1)
+focus_mode = 0
 texture_normal = ExtResource("7_2sne4")
 texture_pressed = ExtResource("8_cbk61")
 stretch_mode = 4
@@ -115,6 +117,7 @@ offset_bottom = 2450.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(5, 2)
+focus_mode = 0
 texture_normal = ExtResource("10_fer63")
 
 [node name="Menu" type="Label" parent="PauseButton/MenuButton"]
@@ -141,60 +144,73 @@ follow_viewport_enabled = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -149.0
-offset_right = 344.0
-offset_bottom = 175.0
+offset_left = 180.0
+offset_top = -343.4
+offset_right = 504.0
+offset_bottom = -19.4
 grow_vertical = 0
 scale = Vector2(0.4, 0.4)
+pivot_offset = Vector2(0, 324)
 texture = ExtResource("12_8ttyq")
 
 [node name="Up" type="TextureButton" parent="Directions"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -149.0
-offset_right = 344.0
-offset_bottom = 175.0
+offset_left = 180.0
+offset_top = -343.4
+offset_right = 504.0
+offset_bottom = -19.4
 grow_vertical = 0
 scale = Vector2(0.4, 0.4)
+pivot_offset = Vector2(0, 324)
 texture_normal = ExtResource("13_6eqkh")
 
 [node name="Down" type="TextureButton" parent="Directions"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -149.0
-offset_right = 344.0
-offset_bottom = 175.0
+offset_left = 180.0
+offset_top = -343.4
+offset_right = 504.0
+offset_bottom = -19.4
 grow_vertical = 0
 scale = Vector2(0.4, 0.4)
+pivot_offset = Vector2(0, 324)
 texture_normal = ExtResource("14_3pcgx")
 
 [node name="Right" type="TextureButton" parent="Directions"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -149.0
-offset_right = 344.0
-offset_bottom = 175.0
+offset_left = 180.0
+offset_top = -343.4
+offset_right = 504.0
+offset_bottom = -19.4
 grow_vertical = 0
 scale = Vector2(0.4, 0.4)
+pivot_offset = Vector2(0, 324)
 texture_normal = ExtResource("15_02vvx")
 
 [node name="Left" type="TextureButton" parent="Directions"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -149.0
-offset_right = 344.0
-offset_bottom = 175.0
+offset_left = 180.0
+offset_top = -343.4
+offset_right = 504.0
+offset_bottom = -19.4
 grow_vertical = 0
 scale = Vector2(0.4, 0.4)
+pivot_offset = Vector2(0, 324)
 texture_normal = ExtResource("16_nop38")
+
+[node name="TimerValue" type="Label" parent="."]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 40.0
+offset_right = 261.0
+offset_bottom = 66.0
+script = ExtResource("18_kjtwi")
 
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="_on_pressed"]

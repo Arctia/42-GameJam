@@ -29,4 +29,3 @@ func get_lives(lives:int):
 
 func get_ashes(amount:int):
 	$LIFE/LifeAct.value = amount
-

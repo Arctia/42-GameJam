@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=6 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
 [ext_resource type="PackedScene" uid="uid://x8ukfuvvqph" path="res://src/entities/ash.tscn" id="2_w1o6o"]
 [ext_resource type="PackedScene" uid="uid://b5dgmqqaqyfji" path="res://HUD/hud.tscn" id="3_na14k"]
+[ext_resource type="PackedScene" uid="uid://cxg4t871uddd" path="res://src/UI/dialogue_control.tscn" id="5_e182c"]
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -38,14 +39,15 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.223529, 0.223529, 0.223529, 1)
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Game" type="Node2D" parent="."]
+unique_name_in_owner = true
 
-[node name="GameMap" parent="Node2D" instance=ExtResource("1_h5cua")]
+[node name="GameMap" parent="Game" instance=ExtResource("1_h5cua")]
 position = Vector2(229, 660)
 
-[node name="ash" parent="Node2D" instance=ExtResource("2_w1o6o")]
+[node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(166, 614)
+position = Vector2(224, 251)
 consume = 0.1
 
 [node name="ColorRect3" type="ColorRect" parent="."]
@@ -63,7 +65,7 @@ color = Color(0.0784314, 0.0156863, 0.0470588, 1)
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 161.0
+offset_bottom = 180.0
 grow_horizontal = 2
 color = Color(0.0784314, 0.0156863, 0.0470588, 1)
 
@@ -92,3 +94,22 @@ color = Color(0.0784314, 0.0156863, 0.0470588, 1)
 [node name="HUD" parent="." instance=ExtResource("3_na14k")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[node name="DialogueControl" parent="." instance=ExtResource("5_e182c")]
+visible = false
+z_index = 2
+custom_minimum_size = Vector2(540, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -18.5
+offset_right = 0.5
+offset_bottom = 18.5
+dialogue = "no time to see"
+bg_color = Color(0, 0, 0, 0.768627)
+
+[connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
