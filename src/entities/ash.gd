@@ -143,6 +143,8 @@ func get_more_ash(value:float) -> void:
 # ---------------------------------------------------------------------------- #
 # -- Player HP
 
+signal got_hit
+
 @export var consume:float = 1
 @export var lives:int = 5
 
@@ -161,6 +163,7 @@ func _get_hit(damage:float) -> void:
 		ashes_amount -= damage
 		self.invincible = true
 		$Timer.start()
+		got_hit.emit()
 		# do a white flash with shaders
 
 func _on_timer_timeout():

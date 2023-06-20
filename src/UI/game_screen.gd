@@ -66,4 +66,6 @@ func _move_background() -> void:
 		tweens[i - 1].set_trans(Tween.TRANS_SINE)
 		tweens[i - 1].play()
 		i += 1
-	
+
+func _on_ash_got_hit():
+	$Node/spine.play()
