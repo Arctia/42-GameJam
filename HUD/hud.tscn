@@ -142,11 +142,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -182.0
+offset_top = -149.0
 offset_right = 344.0
-offset_bottom = 142.0
+offset_bottom = 175.0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("12_8ttyq")
 
 [node name="Up" type="TextureButton" parent="Directions"]
@@ -154,11 +154,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -182.0
+offset_top = -149.0
 offset_right = 344.0
-offset_bottom = 142.0
+offset_bottom = 175.0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture_normal = ExtResource("13_6eqkh")
 
 [node name="Down" type="TextureButton" parent="Directions"]
@@ -166,11 +166,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -182.0
+offset_top = -149.0
 offset_right = 344.0
-offset_bottom = 142.0
+offset_bottom = 175.0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture_normal = ExtResource("14_3pcgx")
 
 [node name="Right" type="TextureButton" parent="Directions"]
@@ -178,11 +178,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -182.0
+offset_top = -149.0
 offset_right = 344.0
-offset_bottom = 142.0
+offset_bottom = 175.0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture_normal = ExtResource("15_02vvx")
 
 [node name="Left" type="TextureButton" parent="Directions"]
@@ -190,11 +190,11 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 20.0
-offset_top = -182.0
+offset_top = -149.0
 offset_right = 344.0
-offset_bottom = 142.0
+offset_bottom = 175.0
 grow_vertical = 0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 texture_normal = ExtResource("16_nop38")
 
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="_on_pressed"]

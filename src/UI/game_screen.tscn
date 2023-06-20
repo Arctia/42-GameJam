@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=5 format=3 uid="uid://8d7lx82ts0ee"]
 
+[ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
 [ext_resource type="PackedScene" uid="uid://x8ukfuvvqph" path="res://src/entities/ash.tscn" id="2_w1o6o"]
+[ext_resource type="PackedScene" uid="uid://b5dgmqqaqyfji" path="res://HUD/hud.tscn" id="3_na14k"]
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3i20e")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -41,7 +44,9 @@ color = Color(0.223529, 0.223529, 0.223529, 1)
 position = Vector2(229, 660)
 
 [node name="ash" parent="Node2D" instance=ExtResource("2_w1o6o")]
+unique_name_in_owner = true
 position = Vector2(166, 614)
+consume = 0.1
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1
@@ -83,3 +88,7 @@ offset_top = -201.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.0784314, 0.0156863, 0.0470588, 1)
+
+[node name="HUD" parent="." instance=ExtResource("3_na14k")]
+unique_name_in_owner = true
+layout_mode = 1

@@ -1,7 +1,7 @@
 extends Control
 
 func get_lives(lives:int):
-	if lives == 5:
+	if lives >= 5:
 		$LIFE/Life1.visible = true
 		$LIFE/Life2.visible = true
 		$LIFE/Life3.visible = true
@@ -27,14 +27,6 @@ func get_lives(lives:int):
 		$LIFE/Life3.visible = false
 		$LIFE/Life4.visible = false
 
-func get_act_life(amount:int):
+func get_ashes(amount:int):
 	$LIFE/LifeAct.value = amount
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	get_lives(5)
-	get_act_life(100)

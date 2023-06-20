@@ -27,7 +27,7 @@ func _ready():
 	FRICTION = ACC
 
 func _physics_process(delta):
-	if self.move(delta): self.reduce_ashes(delta)
+	if self.move(delta): self._consume(delta)
 	self.jumping(delta)
 	self.ducking()
 	self.check_anim()
@@ -82,11 +82,7 @@ func ducking() -> void:
 	is_ducking = collisionShape.disabled
 	
 
-func reduce_ashes(delta) -> void:
-	if self.ashes_amount > 0: 
-		self.ashes_amount -= abs(velocity.x) * delta
-		consume_ashes.emit(self.ashes_amount)
-	else: velocity.x = 0
+
 
 func rotating(delta) -> void:
 	if velocity.x != 0:
@@ -130,5 +126,8 @@ func get_more_ash(value:float) -> void:
 var ashes_amount:float = 100.0
 var status:String = "active"
 
-func _consume(dt:float) -> void:
-	pass
+func _consume(dt) -> void:
+	if self.ashes_amount > 0: 
+		self.ashes_amount -= consume
+		consume_ashes.emit(self.ashes_amount)
+	else: velocity.x = 0
