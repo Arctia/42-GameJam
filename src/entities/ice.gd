@@ -1,8 +1,5 @@
 extends Area2D
 
-var jump_sfx = load(".")
-
-
 func _on_body_entered(body):
 	if "ash" in body.name:
 		body.world_fric /= 20. 

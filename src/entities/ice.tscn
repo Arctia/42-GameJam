@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cseqgwrrkymy7"]
+[gd_scene load_steps=11 format=3 uid="uid://cseqgwrrkymy7"]
 
 [ext_resource type="Texture2D" uid="uid://blx1v2aeqmoid" path="res://assets/ice_frames/ice_frames1.png" id="1_2slmp"]
-[ext_resource type="Script" path="res://src/entities/ice.gd" id="1_fqsmd"]
 [ext_resource type="Texture2D" uid="uid://bmd7wqc60s838" path="res://assets/ice_frames/ice_frames2.png" id="2_moi12"]
 [ext_resource type="Texture2D" uid="uid://cprfulnd2ei38" path="res://assets/ice_frames/ice_frames3.png" id="3_1n34m"]
 [ext_resource type="Texture2D" uid="uid://cqyxmc2y4rq4d" path="res://assets/ice_frames/ice_frames5.png" id="4_7csqs"]
@@ -46,7 +45,6 @@ animations = [{
 size = Vector2(32, 9)
 
 [node name="ice" type="Area2D"]
-script = ExtResource("1_fqsmd")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mqyxl")
@@ -55,6 +53,3 @@ frame_progress = 0.135191
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_u1qwk")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_exited" from="." to="." method="_on_body_exited"]
