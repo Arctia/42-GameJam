@@ -47,7 +47,9 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(342, -922)
+position = Vector2(278, -181)
+floor_max_angle = 0.349066
+floor_snap_length = 0.1
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1
