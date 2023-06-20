@@ -22,7 +22,8 @@ var idle:float = 0.0
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
 var is_jumping:bool = false
 var is_ducking:bool = false
-var cShapeHalved:bool = false
+var can_fall:bool = false
+var xaxis:int = 0
 
 func _ready():
 	FRICTION = ACC
@@ -30,13 +31,13 @@ func _ready():
 func _physics_process(delta):
 	if self.move(delta): self._consume(delta)
 	self.jumping(delta)
-#	self.ducking()
+	self.ducking()
 	self.check_anim()
 	self.rotating(delta)
 	move_and_slide()
 
 func move(_delta) -> bool:
-	var xaxis = Input.get_axis("move_left", "move_right")
+	xaxis = Input.get_axis("move_left", "move_right")
 	
 	if xaxis and self.ashes_amount > 0: velocity.x += xaxis * ACC
 	else: velocity.x = move_toward(velocity.x, 0, FRICTION/2)
@@ -47,25 +48,26 @@ func move(_delta) -> bool:
 func get_which_wall_collided() -> int :
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
-		if collision.get_normal().x > 0:
+		if collision.get_normal().x > 0 and xaxis < 0:
 			return -1
-		elif collision.get_normal().x < 0:
+		elif collision.get_normal().x < 0 and xaxis > 0:
 			return 1
 	return 0
+	
 
 func jumping(delta) -> void:
-	if is_on_wall_only():
+	if is_on_wall_only() and xaxis != 0:
 		if velocity.y < 0:
 			velocity.y = 0
 		velocity.y += gravity/10. * delta
+		is_jumping = false
 	elif not is_on_floor(): velocity.y += gravity * delta
 	
 	if Input.is_action_just_pressed("jump") or is_jumping: #and self.ashes_amount > 0: 
-		if is_on_floor():
+		if is_on_floor_only():
 			is_jumping = true
-		if is_on_wall_only():
-			velocity.x = JUMP * get_which_wall_collided() * 2.
-			is_jumping = false
+		if is_on_wall_only() and not is_jumping:
+			velocity.x = JUMP * get_which_wall_collided() * 3.
 		else:
 			velocity.y += JUMP/JUMP_FORCE_STEPS
 		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS) or is_on_ceiling():
@@ -74,6 +76,24 @@ func jumping(delta) -> void:
 	#		consume_ashes.emit(self.ashes_amount)
 	if Input.is_action_just_released("jump"): is_jumping = false
 
+
+func ducking():
+	if can_fall and Input.is_action_pressed("duck"):
+		collisionShape.set_deferred("disabled", true)
+	else:
+		collisionShape.set_deferred("disabled", false)
+
+
+func _on_floor_checker_body_entered(_body):
+	can_fall = false # Replace with function body.
+	
+
+func _on_floor_checker_body_exited(_body):
+	can_fall = true # Replace with function body.
+
+
+# ^-------^ movems ^-------^ #
+		
 
 func rotating(delta) -> void:
 	if velocity.x != 0:
@@ -133,4 +153,3 @@ func _get_hit(damage:float) -> void:
 
 func _on_timer_timeout():
 	self.invincible = false
-
