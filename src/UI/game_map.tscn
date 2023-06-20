@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bmen4pi0ult14" path="res://src/tilemap/tile_map.tscn" id="1_2hlv0"]
 [ext_resource type="Script" path="res://src/UI/game_map.gd" id="1_uck1v"]
-[ext_resource type="PackedScene" path="res://src/entities/new_level.tscn" id="2_nc72v"]
+[ext_resource type="PackedScene" uid="uid://bai7r7ajar44a" path="res://src/entities/new_level.tscn" id="2_nc72v"]
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_uck1v")

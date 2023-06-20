@@ -38,5 +38,5 @@ func _to_new_level(how_many:int=1) -> void:
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.play()
-	_raise_level()
+	#_raise_level()
 
