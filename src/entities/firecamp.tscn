@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cco555488r4p4"]
+
+[ext_resource type="Texture2D" uid="uid://dvs7orqd6c7qu" path="res://assets/Firecamp/Logs.png" id="1_4cqji"]
+[ext_resource type="Texture2D" uid="uid://cpor8x1tukm21" path="res://assets/Firecamp/Logs1.png" id="2_adakn"]
+[ext_resource type="Texture2D" uid="uid://cqdfu38kncxqd" path="res://assets/Firecamp/Logs2.png" id="3_ejxps"]
+[ext_resource type="Texture2D" uid="uid://br6xpw4j46wgg" path="res://assets/Firecamp/Logs3.png" id="4_hkyxb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgmmd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_adakn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ejxps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hkyxb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="firecamp" type="Node2D"]
+
+[node name="logs" type="Sprite2D" parent="."]
+texture = ExtResource("1_4cqji")
+
+[node name="fire" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rgmmd")
+autoplay = "default"
+frame_progress = 0.642689
