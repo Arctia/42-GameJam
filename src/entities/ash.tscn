@@ -25,22 +25,6 @@ shader_parameter/noise = SubResource("NoiseTexture2D_skocy")
 custom_solver_bias = 1.0
 radius = 28.0
 
-[sub_resource type="Animation" id="Animation_wgtd8"]
-resource_name = "Open_Eyes"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyes:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("5_f5adn"), ExtResource("6_4q4c2"), ExtResource("5_f5adn"), ExtResource("4_6dmeg")]
-}
-
 [sub_resource type="ImageTexture" id="ImageTexture_mgkda"]
 
 [sub_resource type="Animation" id="Animation_1qigu"]
@@ -61,6 +45,22 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_80axr"]
 resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_wgtd8"]
+resource_name = "Open_Eyes"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyes:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_f5adn"), ExtResource("6_4q4c2"), ExtResource("5_f5adn"), ExtResource("4_6dmeg")]
+}
 
 [sub_resource type="Animation" id="Animation_ll61v"]
 length = 0.001

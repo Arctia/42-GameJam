@@ -5,8 +5,8 @@ signal consume_ashes(new_value)
 
 const JUMP_FORCE_STEPS : float = 5.
 
-@export var ACC:float = 0
-@export var MAX_SPEED:float = 400
+@export var ACC:float = 30
+@export var MAX_SPEED:float = 200
 @export var JUMP:float = -500
 var FRICTION:float
 var moving:bool = false
@@ -17,7 +17,7 @@ var idle:float = 0.0
 @onready var collisionShape = $CollisionShape2D
 
 @export var ashes_full:float = 100000
-@export var ashes_amount:float = 100000
+#@export var ashes_amount:float = 100000
 
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
 var is_jumping:bool = true
@@ -120,3 +120,15 @@ func get_more_ash(value:float) -> void:
 	self.ashes_amount += value
 	if self.ashes_amount > self.ashes_full: self.ashes_amount = self.ashes_full
 	consume_ashes.emit(self.ashes_amount)
+
+# ---------------------------------------------------------------------------- #
+# -- Player HP
+
+@export var consume:float = 1
+@export var lives:int = 5
+
+var ashes_amount:float = 100.0
+var status:String = "active"
+
+func _consume(dt:float) -> void:
+	pass

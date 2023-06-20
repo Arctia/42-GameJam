@@ -42,8 +42,6 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Node2D" instance=ExtResource("2_w1o6o")]
 position = Vector2(166, 614)
-ACC = 8.0
-MAX_SPEED = 300.0
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1
