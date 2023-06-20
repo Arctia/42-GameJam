@@ -14,23 +14,30 @@ var intermezzi:Dictionary = {
 	to ..."
 } 
 
-func _process(dt):
+func _ready():
+#	_to_new_level(1)
+	pass
+
+func _process(_dt):
 	HUD.get_lives(player.lives)
 	HUD.get_ashes(player.ashes_amount)
 
 func _raise_level():
 	level += 1
-	if level in intermezzi: $DialogueControl._play(intermezzi[level])
+	if level in intermezzi: 
+		$DialogueControl._play(intermezzi[level])
+		self.get_tree().paused = true
 
 # ---------------------------------------------------------------------------- #
 # --- New Level Logic
 
-func _to_new_level() -> void:
-	%ash.position.y -= 8
+func _to_new_level(how_many:int=1) -> void:
+	%ash.position.y -= 40
 	print("Tween production")
 	var tween = self.create_tween()
-	tween.tween_property(%Game, "position:y", %Game.position.y + (14 * 32), 1.0)
+	tween.tween_property(%Game, "position:y", %Game.position.y + (14 * 32) * how_many, 0.6)
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.play()
-	_raise_level()
+	#_raise_level()
+

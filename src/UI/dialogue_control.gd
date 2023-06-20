@@ -49,11 +49,16 @@ func skip() -> void:
 	self.text = dialogue
 	reach_the_end.emit()
 
+func _input(event):
+	if (event.is_action_pressed("jump")):
+		_on_button_pressed()
+
 func _on_button_pressed():
 	if self.dialogue != self.text:
-		self.dialogue = self.text
-	else:
+		self.text = self.dialogue
 		reach_the_end.emit()
+	else:
 		self.visible = false
 		$Button.disabled = true
 		$Button.visible = false
+		self.get_tree().paused = false
