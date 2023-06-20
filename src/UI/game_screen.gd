@@ -10,7 +10,7 @@ var intermezzi:Dictionary = {
 	to move around.",
 	2: "There's always a first time
 	to being stitched.",
-	6: "There's always a first time
+	5: "There's always a first time
 	to ..."
 } 
 
@@ -39,5 +39,31 @@ func _to_new_level(how_many:int=1) -> void:
 	tween.set_ease(Tween.EASE_IN)
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.play()
-	#_raise_level()
+	
+	var tween2 = self.create_tween()
+	tween2.tween_property(%greywall, "position:y", %greywall.position.y + (15 * 32) * how_many, 0.6)
+	tween2.set_ease(Tween.EASE_IN)
+	tween2.set_trans(Tween.TRANS_SINE)
+	tween2.play()
+	
+	_move_background()
+	
+	_raise_level()
 
+# ---------------------------------------------------------------------------- #
+# --- Parallax
+
+@onready var bg_arr = [%Sprite2D, %Sprite2D2, %Sprite2D3, %Sprite2D4]
+@export var par_var = 15
+
+func _move_background() -> void:
+	var i:int = 1
+	var tweens:Array = [create_tween(), create_tween(), create_tween(), create_tween()]
+	
+	for el in bg_arr:
+		tweens[i - 1].tween_property(el, "position:y", el.position.y + par_var / i, 0.6)
+		tweens[i - 1].set_ease(Tween.EASE_IN)
+		tweens[i - 1].set_trans(Tween.TRANS_SINE)
+		tweens[i - 1].play()
+		i += 1
+	

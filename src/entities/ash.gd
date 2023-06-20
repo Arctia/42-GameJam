@@ -42,8 +42,13 @@ func _physics_process(delta):
 func move(_delta) -> bool:
 	xaxis = Input.get_axis("move_left", "move_right")
 	
+	var curr_acc = ACC
+	var curr_fric = FRICTION
+	if not is_on_floor():
+		curr_acc /= 2.
+		curr_fric /= 10.
 	if xaxis and self.ashes_amount > 0: velocity.x += xaxis * ACC
-	else: velocity.x = move_toward(velocity.x, 0, FRICTION/2)
+	else: velocity.x = move_toward(velocity.x, 0, curr_fric/2)
 	velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
 	if velocity.x != 0: return true
 	return false
@@ -67,21 +72,27 @@ func jumping(delta) -> void:
 		if is_on_floor():
 			set_deferred("is_jumping", true)
 		if is_on_wall_only() and not is_jumping:
-			velocity.x = JUMP * get_which_wall_collided() * 2.
+			velocity.x = JUMP * get_which_wall_collided() * 3.
+			velocity.y -= abs(velocity.x) / 8.
+			if velocity.x > 0:
+				Input.action_release("move_left")
+			if velocity.x < 0:
+				Input.action_release("move_right")
 		elif is_jumping:
 			velocity.y += JUMP/JUMP_FORCE_STEPS
 		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS) or is_on_ceiling():
 			set_deferred("is_jumping", false)
 #		self.ashes_amount -= abs(JUMP) * delta
-	#		consume_ashes.emit(self.ashes_amount)
-	if Input.is_action_just_released("jump"): set_deferred("is_jumping", false)
+#		consume_ashes.emit(self.ashes_amount)
+	if Input.is_action_just_released("jump"): 
+		is_jumping = false
 
 
 func ducking():
 	if can_fall and Input.is_action_pressed("duck"):
-		collisionShape.set_deferred("disabled", true)
+		collisionShape.set_deferred("scale", Vector2(0.4, 0.4))
 	else:
-		collisionShape.set_deferred("disabled", false)
+		collisionShape.set_deferred("scale", Vector2(1., 1.))
 
 
 func _on_floor_checker_body_entered(_body):
@@ -89,7 +100,8 @@ func _on_floor_checker_body_entered(_body):
 	
 
 func _on_floor_checker_body_exited(_body):
-	can_fall = true # Replace with function body.
+	if is_on_floor():
+		can_fall = true # Replace with function body.
 
 
 # ^-------^ movems ^-------^ #

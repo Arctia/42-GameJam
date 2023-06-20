@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://seo6w0nnxdql"]
+[gd_scene load_steps=9 format=3 uid="uid://seo6w0nnxdql"]
 
 [ext_resource type="Theme" uid="uid://csi604a0328au" path="res://src/theme.tres" id="1_sdxuo"]
 [ext_resource type="Script" path="res://src/UI/title_screen.gd" id="2_fqmvn"]
 [ext_resource type="PackedScene" uid="uid://bmen4pi0ult14" path="res://src/tilemap/tile_map.tscn" id="3_jbddq"]
 [ext_resource type="PackedScene" uid="uid://x8ukfuvvqph" path="res://src/entities/ash.tscn" id="4_pmvk2"]
+[ext_resource type="AudioStream" uid="uid://cb4qcyhw27naw" path="res://Music/Notte nera.mp3" id="5_e1kme"]
 
 [sub_resource type="Animation" id="Animation_jf7hp"]
 length = 0.001
@@ -93,6 +94,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="btn_start_game" type="Button" parent="CenterContainer"]
+process_mode = 3
 layout_mode = 2
 focus_mode = 0
 text = "START GAME"
@@ -111,6 +113,10 @@ color = Color(0.0784314, 0.0156863, 0.0470588, 0)
 libraries = {
 "": SubResource("AnimationLibrary_s0mwh")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_e1kme")
+autoplay = true
 
 [connection signal="pressed" from="CenterContainer/btn_start_game" to="." method="_start_game"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
