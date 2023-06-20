@@ -20,7 +20,7 @@ var idle:float = 0.0
 #@export var ashes_amount:float = 100000
 
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
-var is_jumping:bool = true
+var is_jumping:bool = false
 var is_ducking:bool = false
 var cShapeHalved:bool = false
 
@@ -43,45 +43,37 @@ func move(_delta) -> bool:
 	velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
 	if velocity.x != 0: return true
 	return false
+	
+func get_which_wall_collided() -> int :
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if collision.get_normal().x > 0:
+			return -1
+		elif collision.get_normal().x < 0:
+			return 1
+	return 0
 
 func jumping(delta) -> void:
-	if not is_on_floor() and not is_on_wall_only(): velocity.y += gravity * delta
-	elif is_jumping and is_on_wall_only():
-		if velocity.y < 0:
-			velocity.y = 0.
-		velocity.y += gravity/10. * delta
-	else:
-		is_jumping = false
-		collisionShape.apply_scale(Vector2(1., 1.))
-		cShapeHalved = false
-	
 	if is_on_wall_only():
-		is_jumping = false
-	if Input.is_action_pressed("jump") and not is_jumping and not is_ducking: #and self.ashes_amount > 0: 
+		if velocity.y < 0:
+			velocity.y = 0
+		velocity.y += gravity/10. * delta
+	elif not is_on_floor(): velocity.y += gravity * delta
+	
+	if Input.is_action_just_pressed("jump") or is_jumping: #and self.ashes_amount > 0: 
+		if is_on_floor():
+			is_jumping = true
 		if is_on_wall_only():
-			velocity.x += JUMP 
-			print(velocity)
+			velocity.x = JUMP * get_which_wall_collided() * 2.
+			is_jumping = false
 		else:
 			velocity.y += JUMP/JUMP_FORCE_STEPS
-		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS): is_jumping = true
-		if not cShapeHalved:
-			collisionShape.apply_scale(Vector2(0.5, 0.5))
-			cShapeHalved = true
+		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS) or is_on_ceiling():
+			is_jumping = false
 #		self.ashes_amount -= abs(JUMP) * delta
-#		consume_ashes.emit(self.ashes_amount)
-	elif Input.is_action_just_released("jump"): is_jumping = true
-	if is_jumping:
-		collisionShape.apply_scale(Vector2(0.5, 0.5))
-		cShapeHalved = false
+	#		consume_ashes.emit(self.ashes_amount)
+	if Input.is_action_just_released("jump"): is_jumping = false
 
-func ducking() -> void:
-	if Input.is_action_pressed("duck"):
-		collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
-		is_jumping = true
-	else:
-		if collisionShape.disabled and not is_jumping:
-			collisionShape.set_deferred("scale", Vector2(1., 1.))
-	is_ducking = collisionShape.disabled
 
 func rotating(delta) -> void:
 	if velocity.x != 0:
