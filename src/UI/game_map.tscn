@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://gq31pe1i22pf"]
+[gd_scene load_steps=6 format=3 uid="uid://gq31pe1i22pf"]
 
 [ext_resource type="PackedScene" uid="uid://bmen4pi0ult14" path="res://src/tilemap/tile_map.tscn" id="1_2hlv0"]
 [ext_resource type="Script" path="res://src/UI/game_map.gd" id="1_uck1v"]
 [ext_resource type="PackedScene" uid="uid://cco555488r4p4" path="res://src/entities/firecamp.tscn" id="2_kvexj"]
 [ext_resource type="PackedScene" uid="uid://bai7r7ajar44a" path="res://src/entities/new_level.tscn" id="2_nc72v"]
+[ext_resource type="PackedScene" uid="uid://cseqgwrrkymy7" path="res://src/entities/ice.tscn" id="5_af3f2"]
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_uck1v")
@@ -42,6 +43,30 @@ position = Vector2(191, -1819)
 
 [node name="NewLevel5" parent="level_completes" instance=ExtResource("2_nc72v")]
 position = Vector2(191, -2267)
+
+[node name="ice" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(73, -1808)
+
+[node name="ice2" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(41, -1808)
+
+[node name="ice3" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(9, -1808)
+
+[node name="ice4" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(-23, -1808)
+
+[node name="ice5" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(-55, -1808)
+
+[node name="ice6" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(-87, -1808)
+
+[node name="ice7" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(-119, -1808)
+
+[node name="ice8" parent="." instance=ExtResource("5_af3f2")]
+position = Vector2(-151, -1808)
 
 [connection signal="to_the_next_level" from="level_completes/NewLevel" to="." method="_on_new_level_to_the_next_level"]
 [connection signal="to_the_next_level" from="level_completes/NewLevel2" to="." method="_on_new_level_to_the_next_level"]

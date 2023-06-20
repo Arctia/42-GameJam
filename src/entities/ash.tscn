@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=19 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
@@ -88,6 +88,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nx1jv"]
 radius = 1.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ne715"]
+radius = 34.0
+
 [node name="ash" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 floor_stop_on_slope = false
@@ -117,6 +120,11 @@ position = Vector2(0, 50)
 
 [node name="Area" type="CollisionShape2D" parent="FloorChecker"]
 shape = SubResource("CircleShape2D_nx1jv")
+
+[node name="WorldChecker" type="Area2D" parent="."]
+
+[node name="Area" type="CollisionShape2D" parent="WorldChecker"]
+shape = SubResource("CircleShape2D_ne715")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="FloorChecker" to="." method="_on_floor_checker_body_entered"]
