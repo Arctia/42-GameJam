@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cb4qcyhw27naw"
+path="res://.godot/imported/Notte nera.mp3-661ad4da0f8bedd900892f963b29ad63.mp3str"
+
+[deps]
+
+source_file="res://Music/Notte nera.mp3"
+dest_files=["res://.godot/imported/Notte nera.mp3-661ad4da0f8bedd900892f963b29ad63.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
