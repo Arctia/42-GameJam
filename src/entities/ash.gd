@@ -24,7 +24,7 @@ var is_jumping:bool = false :
 	set(value) :
 		is_jumping = value
 var is_ducking:bool = false
-var can_fall:bool = false
+var can_fall:bool = true
 var xaxis:int = 0
 
 func _ready():
@@ -47,7 +47,7 @@ func move(_delta) -> bool:
 		curr_acc /= 2.
 		curr_fric /= 10.
 	if xaxis and self.ashes_amount > 0: velocity.x += xaxis * ACC
-	else: velocity.x = move_toward(velocity.x, 0, curr_fric/2)
+	else: velocity.x = move_toward(velocity.x, 0, curr_fric)
 	velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
 	if velocity.x != 0: return true
 	return false
@@ -72,7 +72,7 @@ func jumping(delta) -> void:
 			set_deferred("is_jumping", true)
 		if is_on_wall_only() and not is_jumping:
 			velocity.x = JUMP * get_which_wall_collided() * 3.
-			velocity.y -= abs(velocity.x) / 8.
+			velocity.y = -abs(velocity.x) / 8.
 			if velocity.x > 0:
 				Input.action_release("move_left")
 			if velocity.x < 0:
