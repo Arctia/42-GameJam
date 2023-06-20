@@ -43,7 +43,6 @@ func move(_delta) -> bool:
 	if velocity.x != 0: return true
 	return false
 
-
 func jumping(delta) -> void:
 	if not is_on_floor() and not is_on_wall_only(): velocity.y += gravity * delta
 	elif is_jumping and is_on_wall_only():
@@ -71,7 +70,6 @@ func jumping(delta) -> void:
 	if is_jumping:
 		collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
 
-
 func ducking() -> void:
 	if Input.is_action_pressed("duck"):
 		collisionShape.set_deferred("scale", Vector2(0.5, 0.5))
@@ -80,9 +78,6 @@ func ducking() -> void:
 		if collisionShape.disabled and not is_jumping:
 			collisionShape.set_deferred("scale", Vector2(1., 1.))
 	is_ducking = collisionShape.disabled
-	
-
-
 
 func rotating(delta) -> void:
 	if velocity.x != 0:
@@ -125,9 +120,21 @@ func get_more_ash(value:float) -> void:
 
 var ashes_amount:float = 100.0
 var status:String = "active"
+var invincible:bool = true
 
 func _consume(dt) -> void:
 	if self.ashes_amount > 0: 
-		self.ashes_amount -= consume
+		self.ashes_amount -= dt * consume
 		consume_ashes.emit(self.ashes_amount)
 	else: velocity.x = 0
+
+func _get_hit(damage:float) -> void:
+	if not invincible:
+		ashes_amount -= damage
+		self.invincible = true
+		$Timer.start()
+		# do a white flash with shaders
+
+func _on_timer_timeout():
+	self.invincible = false
+

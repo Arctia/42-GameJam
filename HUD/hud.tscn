@@ -95,6 +95,7 @@ offset_right = 248.0
 offset_bottom = 360.0
 grow_horizontal = 0
 scale = Vector2(0.1, 0.1)
+focus_mode = 0
 texture_normal = ExtResource("7_2sne4")
 texture_pressed = ExtResource("8_cbk61")
 stretch_mode = 4
@@ -115,6 +116,7 @@ offset_bottom = 2450.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(5, 2)
+focus_mode = 0
 texture_normal = ExtResource("10_fer63")
 
 [node name="Menu" type="Label" parent="PauseButton/MenuButton"]
