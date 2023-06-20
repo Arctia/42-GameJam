@@ -15,7 +15,8 @@ var intermezzi:Dictionary = {
 } 
 
 func _ready():
-	_to_new_level(1)
+#	_to_new_level(1)
+	pass
 
 func _process(_dt):
 	HUD.get_lives(player.lives)

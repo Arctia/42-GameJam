@@ -47,7 +47,7 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(319, -165)
+position = Vector2(292, 375)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
 
