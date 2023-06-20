@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpotj8tjx2uud"
-path="res://.godot/imported/Logs.png-faadb1e00c48492c39ccc0288884dc2d.ctex"
+uid="uid://dhdcrre50g3xm"
+path="res://.godot/imported/bg-03.png-2bbf1ee93e459cc0557cadb5fbb7ee84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Firecamp/Logs.png"
-dest_files=["res://.godot/imported/Logs.png-faadb1e00c48492c39ccc0288884dc2d.ctex"]
+source_file="res://assets/BG_scene/bg-03.png"
+dest_files=["res://.godot/imported/bg-03.png-2bbf1ee93e459cc0557cadb5fbb7ee84.ctex"]
 
 [params]
 

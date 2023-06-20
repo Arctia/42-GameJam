@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpmkxvskkxq7m"
-path="res://.godot/imported/Fuego_3.png-257a29720adb99f7cf13bbbcecf12b9f.ctex"
+uid="uid://dduub06upge1a"
+path="res://.godot/imported/ember.png-664087b954826398af1fa6ac1c4ca30f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Firecamp/Fuego_3.png"
-dest_files=["res://.godot/imported/Fuego_3.png-257a29720adb99f7cf13bbbcecf12b9f.ctex"]
+source_file="res://assets/Firecamp/ember.png"
+dest_files=["res://.godot/imported/ember.png-664087b954826398af1fa6ac1c4ca30f.ctex"]
 
 [params]
 
