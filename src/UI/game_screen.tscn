@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=19 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
@@ -15,6 +15,67 @@
 [ext_resource type="AudioStream" uid="uid://ccrl6qp1pi7bs" path="res://Music/Fire.mp3" id="9_lhfu7"]
 [ext_resource type="AudioStream" uid="uid://cp7ljwi2ecwbv" path="res://Music/jump.mp3" id="10_phgi5"]
 [ext_resource type="AudioStream" uid="uid://clc75kma44rr0" path="res://Music/Spine.mp3" id="11_52opm"]
+
+[sub_resource type="Animation" id="Animation_svib0"]
+resource_name = "remove_flash"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/whitenoise:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/whitenoise:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_fw3uj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/whitenoise:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/whitenoise:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0yilx"]
+_data = {
+"RESET": SubResource("Animation_fw3uj"),
+"remove_flash": SubResource("Animation_svib0")
+}
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -98,7 +159,7 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(324, -1278)
+position = Vector2(420, 513)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
 
@@ -143,6 +204,15 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.0784314, 0.0156863, 0.0470588, 1)
 
+[node name="whitenoise" type="ColorRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="HUD" parent="." instance=ExtResource("3_na14k")]
 unique_name_in_owner = true
 layout_mode = 1
@@ -179,6 +249,8 @@ stream = ExtResource("8_ie1cu")
 
 [node name="fire" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("9_lhfu7")
+volume_db = -3.0
+autoplay = true
 
 [node name="jump" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("10_phgi5")
@@ -187,6 +259,10 @@ stream = ExtResource("10_phgi5")
 stream = ExtResource("11_52opm")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0yilx")
+}
 
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
+[connection signal="finished" from="Node/fire" to="." method="_on_fire_finished"]

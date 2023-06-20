@@ -23,6 +23,7 @@ animations = [{
 }]
 
 [node name="firecamp" type="Node2D"]
+modulate = Color(1, 0.78, 0.78, 1)
 
 [node name="logs" type="Sprite2D" parent="."]
 texture = ExtResource("1_4cqji")

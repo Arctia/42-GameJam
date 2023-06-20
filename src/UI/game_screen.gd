@@ -11,11 +11,16 @@ var intermezzi:Dictionary = {
 	2: "There's always a first time
 	to being stitched.",
 	5: "There's always a first time
-	to ..."
+	to ice-skate.",
+	7: "There's always a first time
+	to truly jump.",
+	8: "There's always a first time
+	to feel the breeze."
 } 
 
 func _ready():
-	_to_new_level(0)
+	$AnimationPlayer.play("remove_flash")
+#	_to_new_level(0)
 	pass
 
 func _process(_dt):
@@ -47,7 +52,6 @@ func _to_new_level(how_many:int=1) -> void:
 	tween2.play()
 	
 	_move_background()
-	
 	_raise_level()
 
 # ---------------------------------------------------------------------------- #
@@ -70,3 +74,6 @@ func _move_background() -> void:
 
 func _on_ash_got_hit():
 	$Node/spine.play()
+
+func _on_fire_finished():
+	$Node/fire.play()
