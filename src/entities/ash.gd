@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@warning_ignore("narrowing_conversion")
+
 signal setup_ashes(total_ash, current_ash)
 signal consume_ashes(new_value)
 
