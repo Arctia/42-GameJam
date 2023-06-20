@@ -186,5 +186,7 @@ stream = ExtResource("10_phgi5")
 [node name="spine" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("11_52opm")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
