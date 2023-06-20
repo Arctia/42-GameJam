@@ -20,7 +20,9 @@ var idle:float = 0.0
 #@export var ashes_amount:float = 100000
 
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
-var is_jumping:bool = false
+var is_jumping:bool = false : 
+	set(value) :
+		is_jumping = value
 var is_ducking:bool = false
 var can_fall:bool = false
 var xaxis:int = 0
@@ -56,25 +58,23 @@ func get_which_wall_collided() -> int :
 	
 
 func jumping(delta) -> void:
-	if is_on_wall_only() and xaxis != 0:
-		if velocity.y < 0:
-			velocity.y = 0
+	if is_on_wall_only() and xaxis != 0 and velocity.y > 0:
 		velocity.y += gravity/10. * delta
-		is_jumping = false
+		set_deferred("is_jumping", false)
 	elif not is_on_floor(): velocity.y += gravity * delta
 	
 	if Input.is_action_just_pressed("jump") or is_jumping: #and self.ashes_amount > 0: 
-		if is_on_floor_only():
-			is_jumping = true
+		if is_on_floor():
+			set_deferred("is_jumping", true)
 		if is_on_wall_only() and not is_jumping:
-			velocity.x = JUMP * get_which_wall_collided() * 3.
-		else:
+			velocity.x = JUMP * get_which_wall_collided() * 2.
+		elif is_jumping:
 			velocity.y += JUMP/JUMP_FORCE_STEPS
 		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS) or is_on_ceiling():
-			is_jumping = false
+			set_deferred("is_jumping", false)
 #		self.ashes_amount -= abs(JUMP) * delta
 	#		consume_ashes.emit(self.ashes_amount)
-	if Input.is_action_just_released("jump"): is_jumping = false
+	if Input.is_action_just_released("jump"): set_deferred("is_jumping", false)
 
 
 func ducking():
