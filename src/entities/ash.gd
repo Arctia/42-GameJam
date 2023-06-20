@@ -11,6 +11,7 @@ const JUMP_FORCE_STEPS : float = 5.
 var FRICTION:float
 var moving:bool = false
 var idle:float = 0.0
+var on_ice:bool = false
 
 @onready var sprite = $Sprite2D
 @onready var eyes = $Eyes
@@ -104,7 +105,6 @@ func rotating(delta) -> void:
 		self.idle += delta
 		sprite.rotation = move_toward(sprite.rotation, 0.0, delta * 3)
 		eyes.rotation = move_toward(eyes.rotation, 0.0, delta * 3)
-
 func check_anim() -> void:
 	if velocity == Vector2(0,0): self.open_eyes()
 	else: self.close_eyes()

@@ -15,7 +15,7 @@ var intermezzi:Dictionary = {
 } 
 
 func _ready():
-#	_to_new_level(1)
+	_to_new_level(5)
 	pass
 
 func _process(_dt):

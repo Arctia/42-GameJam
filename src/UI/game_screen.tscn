@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=7 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
 [ext_resource type="PackedScene" uid="uid://x8ukfuvvqph" path="res://src/entities/ash.tscn" id="2_w1o6o"]
 [ext_resource type="PackedScene" uid="uid://b5dgmqqaqyfji" path="res://HUD/hud.tscn" id="3_na14k"]
 [ext_resource type="PackedScene" uid="uid://cxg4t871uddd" path="res://src/UI/dialogue_control.tscn" id="5_e182c"]
+[ext_resource type="PackedScene" uid="uid://cseqgwrrkymy7" path="res://src/entities/ice.tscn" id="6_7vwm1"]
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -47,7 +48,7 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(292, 375)
+position = Vector2(125, -1948)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
 
@@ -113,5 +114,46 @@ offset_right = 0.5
 offset_bottom = 18.5
 dialogue = "no time to see"
 bg_color = Color(0, 0, 0, 0.768627)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="ice" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(181, -1658)
+
+[node name="ice2" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(117, -1606)
+
+[node name="ice3" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(149, -1606)
+
+[node name="ice4" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(181, -1606)
+
+[node name="ice5" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(309, -1606)
+
+[node name="ice6" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(341, -1606)
+
+[node name="ice7" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(373, -1606)
+
+[node name="ice8" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(381, -1820)
+
+[node name="ice9" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(125, -1884)
+
+[node name="ice10" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(269, -1860)
+
+[node name="ice11" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(173, -1796)
+
+[node name="ice12" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(325, -1756)
+
+[node name="ice13" parent="Node2D" instance=ExtResource("6_7vwm1")]
+position = Vector2(229, -1700)
 
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
