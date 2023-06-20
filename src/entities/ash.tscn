@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=17 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
 [ext_resource type="Texture2D" uid="uid://dl5w78wxn1goa" path="res://assets/ash/Ashes-0001.png" id="2_x26s7"]
+[ext_resource type="Texture2D" uid="uid://7x6qeihvyd4w" path="res://assets/ash/Ashes-eyes-0001.png" id="4_6dmeg"]
+[ext_resource type="Texture2D" uid="uid://cxtqp4rs8pv27" path="res://assets/ash/Ashes-eyes-0002.png" id="5_f5adn"]
+[ext_resource type="Texture2D" uid="uid://bxtffi715legy" path="res://assets/ash/Ashes-eyes-0003.png" id="6_4q4c2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3u4q0"]
 frequency = 0.009
@@ -22,6 +25,66 @@ shader_parameter/noise = SubResource("NoiseTexture2D_skocy")
 custom_solver_bias = 1.0
 radius = 28.0
 
+[sub_resource type="Animation" id="Animation_wgtd8"]
+resource_name = "Open_Eyes"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyes:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_f5adn"), ExtResource("6_4q4c2"), ExtResource("5_f5adn"), ExtResource("4_6dmeg")]
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_mgkda"]
+
+[sub_resource type="Animation" id="Animation_1qigu"]
+resource_name = "Close_Eyes"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyes:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_f5adn"), ExtResource("6_4q4c2"), ExtResource("6_4q4c2"), SubResource("ImageTexture_mgkda")]
+}
+
+[sub_resource type="Animation" id="Animation_80axr"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="Animation_ll61v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyes:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_6dmeg")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rm0wr"]
+_data = {
+"Close_Eyes": SubResource("Animation_1qigu"),
+"Idle": SubResource("Animation_80axr"),
+"Open_Eyes": SubResource("Animation_wgtd8"),
+"RESET": SubResource("Animation_ll61v")
+}
+
 [node name="ash" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 floor_stop_on_slope = false
@@ -31,10 +94,14 @@ script = ExtResource("1_ekyna")
 material = SubResource("ShaderMaterial_y70k8")
 texture = ExtResource("2_x26s7")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Eyes" type="Sprite2D" parent="."]
+texture = ExtResource("4_6dmeg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_hmren")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rm0wr")
+}

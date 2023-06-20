@@ -13,6 +13,7 @@ var moving:bool = false
 var idle:float = 0.0
 
 @onready var sprite = $Sprite2D
+@onready var eyes = $Eyes
 @onready var collisionShape = $CollisionShape2D
 
 @export var ashes_full:float = 100000
@@ -92,9 +93,11 @@ func rotating(delta) -> void:
 		self.idle = 0
 		var grad:float = velocity.x / 100
 		sprite.rotate(deg_to_rad(grad))
+		eyes.rotate(deg_to_rad(grad))
 	else:
 		self.idle += delta
 		sprite.rotation = move_toward(sprite.rotation, 0.0, delta * 3)
+		eyes.rotation = move_toward(eyes.rotation, 0.0, delta * 3)
 
 func check_anim() -> void:
 	if velocity == Vector2(0,0): self.open_eyes()
@@ -106,12 +109,12 @@ func check_anim() -> void:
 func open_eyes() -> void:
 	if not moving: return
 	moving = false
-	#$AnimationPlayer.play("Open_Eyes")
+	$AnimationPlayer.play("Open_Eyes")
 
 func close_eyes() -> void:
 	if moving: return
 	moving = true
-	#$AnimationPlayer.play("Close_Eyes")
+	$AnimationPlayer.play("Close_Eyes")
 
 func get_more_ash(value:float) -> void:
 	self.ashes_amount += value
