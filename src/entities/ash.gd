@@ -11,7 +11,6 @@ const JUMP_FORCE_STEPS : float = 5.
 var FRICTION:float
 var moving:bool = false
 var idle:float = 0.0
-var on_ice:bool = false
 
 @onready var sprite = $Sprite2D
 @onready var eyes = $Eyes
@@ -25,8 +24,10 @@ var is_jumping:bool = false :
 	set(value) :
 		is_jumping = value
 var is_ducking:bool = false
-var can_fall:bool = false
+var can_fall:bool = true
 var xaxis:int = 0
+
+var world_fric = FRICTION
 
 func _ready():
 	FRICTION = ACC
@@ -43,12 +44,11 @@ func move(_delta) -> bool:
 	xaxis = Input.get_axis("move_left", "move_right")
 	
 	var curr_acc = ACC
-	var curr_fric = FRICTION
 	if not is_on_floor():
 		curr_acc /= 2.
-		curr_fric /= 10.
+		world_fric /= 10.
 	if xaxis and self.ashes_amount > 0: velocity.x += xaxis * ACC
-	else: velocity.x = move_toward(velocity.x, 0, curr_fric/2)
+	else: velocity.x = move_toward(velocity.x, 0, world_fric)
 	velocity.x = clampf(velocity.x, -MAX_SPEED, MAX_SPEED)
 	if velocity.x != 0: return true
 	return false
@@ -73,7 +73,7 @@ func jumping(delta) -> void:
 			set_deferred("is_jumping", true)
 		if is_on_wall_only() and not is_jumping:
 			velocity.x = JUMP * get_which_wall_collided() * 3.
-			velocity.y -= abs(velocity.x) / 8.
+			velocity.y = -abs(velocity.x) / 8.
 			if velocity.x > 0:
 				Input.action_release("move_left")
 			if velocity.x < 0:
@@ -117,6 +117,7 @@ func rotating(delta) -> void:
 		self.idle += delta
 		sprite.rotation = move_toward(sprite.rotation, 0.0, delta * 3)
 		eyes.rotation = move_toward(eyes.rotation, 0.0, delta * 3)
+
 func check_anim() -> void:
 	if velocity == Vector2(0,0): self.open_eyes()
 	else: self.close_eyes()

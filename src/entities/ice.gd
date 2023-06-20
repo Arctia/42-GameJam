@@ -1,10 +1,13 @@
 extends Area2D
 
-#var jump_sfx = load()
+var jump_sfx = load(".")
 
-func on_ice():
-	var player = %ash
-	if overlaps_body(player):
-		return true
-	return false
-	
+
+func _on_body_entered(body):
+	if "ash" in body.name:
+		body.world_fric /= 20. 
+
+func _on_body_exited(body):
+	if "ash" in body.name:
+		body.world_fric = body.FRICTION 
+

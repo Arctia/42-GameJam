@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=7 format=3 uid="uid://8d7lx82ts0ee"]
-=======
-[gd_scene load_steps=12 format=3 uid="uid://8d7lx82ts0ee"]
->>>>>>> 62c4f155d0b0e8ad6f9fb1a01884adc1f1d61efe
+[gd_scene load_steps=16 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
@@ -12,9 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://b5dgmqqaqyfji" path="res://HUD/hud.tscn" id="3_na14k"]
 [ext_resource type="Texture2D" uid="uid://bjp1kwnmjmbs6" path="res://assets/BG_scene/bg-01.png" id="4_eo18k"]
 [ext_resource type="PackedScene" uid="uid://cxg4t871uddd" path="res://src/UI/dialogue_control.tscn" id="5_e182c"]
-<<<<<<< HEAD
-[ext_resource type="PackedScene" uid="uid://cseqgwrrkymy7" path="res://src/entities/ice.tscn" id="6_7vwm1"]
-=======
 [ext_resource type="Texture2D" uid="uid://cx4w8fo3tm3ss" path="res://assets/BG_scene/bg-00.png" id="5_qofyl"]
 [ext_resource type="AudioStream" uid="uid://dqbxpdjowx64" path="res://Music/Pianata m-9702.mp3" id="6_fea2l"]
 [ext_resource type="AudioStream" uid="uid://btcvv17dw6fnd" path="res://Music/Click.mp3" id="7_f0deo"]
@@ -22,7 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://ccrl6qp1pi7bs" path="res://Music/Fire.mp3" id="9_lhfu7"]
 [ext_resource type="AudioStream" uid="uid://cp7ljwi2ecwbv" path="res://Music/jump.mp3" id="10_phgi5"]
 [ext_resource type="AudioStream" uid="uid://clc75kma44rr0" path="res://Music/Spine.mp3" id="11_52opm"]
->>>>>>> 62c4f155d0b0e8ad6f9fb1a01884adc1f1d61efe
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -81,7 +73,7 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(125, -1948)
+position = Vector2(324, -1278)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
 
@@ -148,48 +140,6 @@ offset_bottom = 18.5
 dialogue = "no time to see"
 bg_color = Color(0, 0, 0, 0.768627)
 
-<<<<<<< HEAD
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="ice" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(181, -1658)
-
-[node name="ice2" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(117, -1606)
-
-[node name="ice3" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(149, -1606)
-
-[node name="ice4" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(181, -1606)
-
-[node name="ice5" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(309, -1606)
-
-[node name="ice6" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(341, -1606)
-
-[node name="ice7" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(373, -1606)
-
-[node name="ice8" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(381, -1820)
-
-[node name="ice9" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(125, -1884)
-
-[node name="ice10" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(269, -1860)
-
-[node name="ice11" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(173, -1796)
-
-[node name="ice12" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(325, -1756)
-
-[node name="ice13" parent="Node2D" instance=ExtResource("6_7vwm1")]
-position = Vector2(229, -1700)
-=======
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_fea2l")
 autoplay = true
@@ -210,6 +160,5 @@ stream = ExtResource("10_phgi5")
 
 [node name="spine" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("11_52opm")
->>>>>>> 62c4f155d0b0e8ad6f9fb1a01884adc1f1d61efe
 
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
