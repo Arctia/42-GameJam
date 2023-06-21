@@ -9,3 +9,6 @@ func _on_h_slider_value_changed(value):
 		AudioServer.set_bus_mute(background, true)
 	else:
 		AudioServer.set_bus_mute(background, false)
+
+func _on_button_pressed():
+	$".".visible = false
