@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxb7dcwt67iqh"]
+[gd_scene load_steps=3 format=3 uid="uid://dxb7dcwt67iqh"]
+
+[ext_resource type="Texture2D" uid="uid://bkgdfx4jkcyq" path="res://assets/spike/spike.png" id="1_0ws7q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_quljp"]
-size = Vector2(32, 8)
+size = Vector2(32, 15)
 
 [node name="spike" type="Area2D"]
+texture_filter = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -13)
+position = Vector2(0, 8.5)
 shape = SubResource("RectangleShape2D_quljp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ws7q")
