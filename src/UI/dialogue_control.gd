@@ -50,8 +50,9 @@ func skip() -> void:
 	reach_the_end.emit()
 
 func _input(event):
-	if (event.is_action_pressed("jump")):
-		_on_button_pressed()
+#	if (event.is_action_pressed("jump")):
+#		_on_button_pressed()
+	pass
 
 func _on_button_pressed():
 	if self.dialogue != self.text:

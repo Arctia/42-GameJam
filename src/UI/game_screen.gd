@@ -21,7 +21,7 @@ var intermezzi:Dictionary = {
 func _ready():
 	$AnimationPlayer.play("remove_flash")
 	HUD.get_lives(player.lives)
-	_to_new_level(Vector2.ZERO, 9)
+	#_to_new_level(Vector2.ZERO, 9)
 	pass
 
 func _process(_dt):
