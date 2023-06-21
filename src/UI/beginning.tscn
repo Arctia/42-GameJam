@@ -88,6 +88,7 @@ offset_top = -409.0
 offset_right = 214.5
 offset_bottom = 409.0
 dialogue = ""
+sequential = true
 
 [node name="btn_forward" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)

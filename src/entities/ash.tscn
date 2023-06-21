@@ -183,8 +183,12 @@ color_ramp = SubResource("Gradient_78he3")
 wait_time = 0.3
 one_shot = true
 
+[node name="Timer3" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="FloorChecker" to="." method="_on_floor_checker_body_entered"]
 [connection signal="body_exited" from="FloorChecker" to="." method="_on_floor_checker_body_exited"]
 [connection signal="timeout" from="respawn" to="." method="respawn"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_game_over"]

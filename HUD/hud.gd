@@ -32,3 +32,9 @@ func get_ashes(amount:int):
 
 func disable_self():
 	self.queue_free()
+
+func reset_time():
+	$TimerValue.reset(0)
+
+func get_time():
+	return $TimerValue.text

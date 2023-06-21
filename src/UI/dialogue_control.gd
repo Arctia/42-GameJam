@@ -1,6 +1,7 @@
 #@tool
 extends Label
 signal reach_the_end
+signal exited
 
 @export var dialogue:String = ""
 @export var frame_rate:float = 0.25
@@ -8,6 +9,7 @@ signal reach_the_end
 @export var execute:bool = true
 @export var bg_color:Color = "#14040c"
 @export var btn_disabled:bool = false
+@export var sequential:bool = false
 
 var sec:float = 0
 var i:int = 0
@@ -50,9 +52,9 @@ func skip() -> void:
 	reach_the_end.emit()
 
 func _input(event):
-#	if (event.is_action_pressed("jump")):
-#		_on_button_pressed()
-	pass
+	if not sequential:
+		if (event.is_action_pressed("jump")):
+			_on_button_pressed()
 
 func _on_button_pressed():
 	if self.dialogue != self.text:
@@ -63,3 +65,4 @@ func _on_button_pressed():
 		$Button.disabled = true
 		$Button.visible = false
 		self.get_tree().paused = false
+		exited.emit()

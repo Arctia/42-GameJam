@@ -341,10 +341,11 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(406, 540)
+position = Vector2(366, -3747)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
 vs_wind = 15.0
+consume = 20.0
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1
@@ -440,7 +441,7 @@ dialogue = "no time to see"
 bg_color = Color(0, 0, 0, 0.768627)
 
 [node name="DialogueControl2" parent="." instance=ExtResource("5_e182c")]
-process_mode = 3
+process_mode = 4
 visible = false
 z_index = 2
 custom_minimum_size = Vector2(540, 600)
@@ -480,4 +481,5 @@ one_shot = true
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
 [connection signal="respawn_signal" from="Game/ash" to="." method="_on_ash_respawn_signal"]
 [connection signal="finished" from="Node/fire" to="." method="_on_fire_finished"]
+[connection signal="exited" from="DialogueControl2" to="." method="_on_dialogue_control_2_exited"]
 [connection signal="timeout" from="Timer" to="." method="_game_end_game"]

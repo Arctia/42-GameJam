@@ -15,9 +15,8 @@ func _ready():
 	_on_btn_forward_pressed()
 
 func _input(event):
-#	if event.is_action_released("jump"):
-#		_on_btn_forward_pressed()
-	pass
+	if event.is_action_released("jump"):
+		_on_btn_forward_pressed()
 
 func _on_btn_forward_pressed() -> void:
 	if dialogue_writing:

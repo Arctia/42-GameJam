@@ -21,7 +21,8 @@ var intermezzi:Dictionary = {
 func _ready():
 	$AnimationPlayer.play("remove_flash")
 	HUD.get_lives(player.lives)
-	#_to_new_level(Vector2.ZERO, 9)
+	HUD.reset_time()
+	_to_new_level(Vector2.ZERO, 9)
 	pass
 
 func _process(_dt):
@@ -84,6 +85,7 @@ func _move_background() -> void:
 		i += 1
 
 func _move_game() -> void:
+	timestamp_endgame = HUD.get_time()
 	var tween = self.create_tween()
 	tween.tween_property(%Game, "position:x", %Game.position.x - 530, 1.8)
 	tween.set_ease(Tween.EASE_IN)
@@ -116,8 +118,10 @@ func _on_ash_respawn_signal():
 func _on_ash_game_over():
 	self.get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")
 
+var timestamp_endgame:String
 
 func _game_end_game():
+	$DialogueControl2.process_mode = Node.PROCESS_MODE_INHERIT
 	var dia = "There is always 
 	a first time
 	.  .  .
@@ -125,3 +129,18 @@ func _game_end_game():
 	the last one"
 	$DialogueControl2._play(dia)
 	$DialogueControl2.visible = true
+
+var inte:int = 0
+
+func _on_dialogue_control_2_exited():
+	if inte == 0:
+		$DialogueControl2.process_mode = Node.PROCESS_MODE_INHERIT
+		var dia = "Congratulations
+		time:
+		"
+		dia += timestamp_endgame
+		$DialogueControl2._play(dia)
+		$DialogueControl2.visible = true
+		inte = 1
+	else:
+		get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")

@@ -233,7 +233,7 @@ func death_check() -> bool:
 		self.invincible = true
 		death_signal.emit()
 	
-	if self.lives < 0: 
+	if self.lives <= 0: 
 		game_over.emit()
 	
 	if self.died: return true
@@ -256,3 +256,6 @@ func respawn() -> void:
 
 func _on_timer_2_timeout():
 	self.invincible = false
+
+func _game_over():
+	game_over.emit()
