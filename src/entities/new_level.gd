@@ -1,6 +1,6 @@
 extends Area2D
 
-signal to_the_next_level
+signal to_the_next_level(pos)
 
 @export var active:bool = true
 
@@ -17,7 +17,6 @@ func player_touched() -> void:
 	for body in get_overlapping_bodies():
 		if body.name == "ash":
 			if body.position.y - 32 > self.position.y:
-				print("yeah")
-				to_the_next_level.emit()
+				to_the_next_level.emit(self.position)
 				$CollisionShape2D.disabled = true
 				%no_turning_back.disabled = false

@@ -24,6 +24,7 @@ var idle:float = 0.0
 #@export var ashes_amount:float = 100000
 
 @export var spike_damage:float = 10.
+@export var vs_wind:float = 100
 
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
 var is_jumping:bool = false : 
@@ -45,7 +46,11 @@ func _ready():
 	FRICTION = ACC
 
 func _physics_process(delta):
-	if self.move(delta): self._consume(delta)
+	if self.deactivate: return
+	if self.death_check(): return
+	self.move(delta)
+	if self.deactivate: return
+	self._consume(delta)
 	self.jumping(delta)
 	self.ducking()
 	self.check_anim()
@@ -58,21 +63,23 @@ func move(_delta) -> bool:
 	
 	var curr_acc = ACC
 
+	floor_type = FLR_NORMAL
 	if worldChecker.get_overlapping_areas().size() > 0:
 		for area in worldChecker.get_overlapping_areas():
+			if "EndGame" in area.name:
+				emit_signal("game_end")
+				self.deactivate = true
+				return false
 			if "ice" in area.name:
 				floor_type = FLR_ICE
 			if "spike" in area.name:
-				$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
 				_get_hit(spike_damage)
 			if "SuperTramp" in area.name:
-				velocity.y = JUMP * 1.5
+				velocity.y = JUMP * 1.25
 				set_deferred("is_jumping",false)
 				area.activate()
 			if "wind" in area.name:
-				velocity.x -= area.speed * area.direction #placeholder
-	else:
-		floor_type = FLR_NORMAL
+				velocity.x += area.force * self.vs_wind #placeholder
 	if floor_type == FLR_NORMAL:
 		world_fric = FRICTION / 2.
 	elif floor_type == FLR_ICE:
@@ -116,6 +123,7 @@ func jumping(delta) -> void:
 			velocity.y += JUMP/JUMP_FORCE_STEPS
 		if abs(velocity.y) > abs(JUMP) - abs(JUMP/JUMP_FORCE_STEPS) or is_on_ceiling():
 			set_deferred("is_jumping", false)
+		self._consume(delta * 4)
 #		self.ashes_amount -= abs(JUMP) * delta
 #		consume_ashes.emit(self.ashes_amount)
 	if Input.is_action_just_released("jump"): 
@@ -156,7 +164,7 @@ func check_anim() -> void:
 	if velocity == Vector2(0,0): self.open_eyes()
 	else: self.close_eyes()
 	if self.idle > 5:
-		#$AnimationPlayer.play("Idle")
+		$AnimationPlayer.play("Idle")
 		self.idle = 0
 
 func open_eyes() -> void:
@@ -178,13 +186,20 @@ func get_more_ash(value:float) -> void:
 # -- Player HP
 
 signal got_hit
+signal death_signal
+signal respawn_signal
+signal game_over
+signal game_end
 
 @export var consume:float = 1
 @export var lives:int = 5
+@export var inv_time:float = 1.5
 
 var ashes_amount:float = 100.0
 var status:String = "active"
-var invincible:bool = true
+var invincible:bool = false
+var died:bool = false
+var deactivate:bool = false
 
 func _consume(dt) -> void:
 	if self.ashes_amount > 0: 
@@ -194,13 +209,50 @@ func _consume(dt) -> void:
 
 func _get_hit(damage:float) -> void:
 	if not invincible:
+		$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
 		ashes_amount -= damage
 		self.invincible = true
-		$Timer.start()
+		$Timer.start(self.inv_time)
 		got_hit.emit()
 		# do a white flash with shaders
 
 func _on_timer_timeout():
-	self.invincible = false
 	$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
+	self.invincible = false
 
+func death_check() -> bool:
+	if self.ashes_amount <= 0 and not self.died:
+		self.died = true
+		self.lives -= 1
+		$Sprite2D.visible = false
+		$Eyes.visible = false
+		$CollisionShape2D.disabled = true
+		$CPUParticles2D.emitting = true
+		self.velocity = Vector2.ZERO
+		$respawn.start()
+		self.invincible = true
+		death_signal.emit()
+	
+	if self.lives < 0: 
+		game_over.emit()
+	
+	if self.died: return true
+	return false
+
+func respawn() -> void:
+	self.invincible = true
+	$Timer2.start(0.3)
+	respawn_signal.emit()
+	is_jumping = false
+	is_ducking = false
+	can_fall = true
+	$Sprite2D.rotation_degrees = 0
+	$Eyes.rotation_degrees = 0
+	ashes_amount = 100.0
+	self.died = false
+	$Sprite2D.visible = true
+	$Eyes.visible = true
+	$CollisionShape2D.disabled = false
+
+func _on_timer_2_timeout():
+	self.invincible = false

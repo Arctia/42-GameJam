@@ -20,11 +20,12 @@ var intermezzi:Dictionary = {
 
 func _ready():
 	$AnimationPlayer.play("remove_flash")
-#	_to_new_level(0)
+	HUD.get_lives(player.lives)
+	_to_new_level(Vector2.ZERO, 9)
 	pass
 
 func _process(_dt):
-	HUD.get_lives(player.lives)
+	#HUD.get_lives(player.lives)
 	HUD.get_ashes(player.ashes_amount)
 
 func _raise_level():
@@ -43,9 +44,11 @@ func _raise_level():
 # ---------------------------------------------------------------------------- #
 # --- New Level Logic
 
-func _to_new_level(how_many:int=1) -> void:
+var last_checkpoint:Vector2 = Vector2(410.0, 534.0)
+
+func _to_new_level(_pos:Vector2 = Vector2.ZERO, how_many:int=1) -> void:
 	%ash.position.y -= 40
-	print("Tween production")
+	last_checkpoint = %ash.position
 	var tween = self.create_tween()
 	tween.tween_property(%Game, "position:y", %Game.position.y + (14 * 32) * how_many, 0.6)
 	tween.set_ease(Tween.EASE_IN)
@@ -64,7 +67,7 @@ func _to_new_level(how_many:int=1) -> void:
 # ---------------------------------------------------------------------------- #
 # --- Parallax
 
-@onready var bg_arr = [%Sprite2D, %Sprite2D2, %Sprite2D3, %Sprite2D4]
+@onready var bg_arr = [%Sprite2D4, %Sprite2D3, %Sprite2D2, %Sprite2D]
 @export var par_var = 15
 
 func _move_background() -> void:
@@ -79,8 +82,33 @@ func _move_background() -> void:
 		tweens[i - 1].play()
 		i += 1
 
+func _move_game() -> void:
+	var tween = self.create_tween()
+	tween.tween_property(%Game, "position:x", %Game.position.x - 530, 1.8)
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_SINE)
+	tween.play()
+	var ptween = self.create_tween()
+	ptween.tween_property(%ash, "position", Vector2(%ash.position.x + 420, %ash.position.y + 230), 10)
+	ptween.parallel().tween_property(%ash, "scale", Vector2(0.01, 0.01), 10)
+	ptween.set_ease(Tween.EASE_OUT)
+	ptween.set_trans(Tween.TRANS_SINE)
+	ptween.play()
+	$AnimationPlayer.play("game_end")
+	
+
 func _on_ash_got_hit():
 	$Node/spine.play()
 
 func _on_fire_finished():
 	$Node/fire.play()
+
+func _on_ash_death_signal():
+	$Node/death.play()
+	HUD.get_lives(player.lives)
+
+func _on_ash_respawn_signal():
+	%ash.position = self.last_checkpoint
+
+func _on_ash_game_over():
+	self.get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")

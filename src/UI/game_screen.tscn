@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=20 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
@@ -42,6 +42,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("end_game_bg:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_svib0"]
 resource_name = "remove_flash"
@@ -71,9 +95,38 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_cd4ad"]
+resource_name = "game_end"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("end_game_bg:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 0.420448),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0yilx"]
 _data = {
 "RESET": SubResource("Animation_fw3uj"),
+"game_end": SubResource("Animation_cd4ad"),
 "remove_flash": SubResource("Animation_svib0")
 }
 
@@ -85,6 +138,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3i20e")
+
+[node name="end_game_bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="parallax" type="Node2D" parent="."]
 z_index = -1
@@ -159,9 +221,10 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(420, 513)
+position = Vector2(403, -3769)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
+vs_wind = 15.0
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 1
@@ -267,5 +330,9 @@ libraries = {
 }
 
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
+[connection signal="death_signal" from="Game/ash" to="." method="_on_ash_death_signal"]
+[connection signal="game_end" from="Game/ash" to="." method="_move_game"]
+[connection signal="game_over" from="Game/ash" to="." method="_on_ash_game_over"]
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
+[connection signal="respawn_signal" from="Game/ash" to="." method="_on_ash_respawn_signal"]
 [connection signal="finished" from="Node/fire" to="." method="_on_fire_finished"]

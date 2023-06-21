@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D noise;
 uniform bool damaged = false;
-uniform float speed = 25.;
+uniform float speed = 12.;
 
 void fragment() {
 	float angle = TIME;
