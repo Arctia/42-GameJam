@@ -1,6 +1,6 @@
-extends TextureButton
+extends Button
 
 func _on_pressed():
 #	$MenuButton.visible = false
 #	$OptionButton.visible = false
-	$"../../LIFE/Control".visible = true
+	%Control.visible = true

@@ -22,8 +22,8 @@ func _ready():
 	$AnimationPlayer.play("remove_flash")
 	HUD.get_lives(player.lives)
 	HUD.reset_time()
-	_to_new_level(Vector2.ZERO, 9)
-	pass
+	#_to_new_level(Vector2.ZERO, 9)
+	#pass
 
 func _process(_dt):
 	if HUD != null:
@@ -133,6 +133,7 @@ func _game_end_game():
 var inte:int = 0
 
 func _on_dialogue_control_2_exited():
+	print("hi")
 	if inte == 0:
 		$DialogueControl2.process_mode = Node.PROCESS_MODE_INHERIT
 		var dia = "Congratulations
@@ -143,4 +144,4 @@ func _on_dialogue_control_2_exited():
 		$DialogueControl2.visible = true
 		inte = 1
 	else:
-		get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")
+		get_tree().change_scene_to_file("res://src/Credits.tscn")

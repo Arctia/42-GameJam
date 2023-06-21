@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpocrdiewrno5"]
+[gd_scene load_steps=3 format=3 uid="uid://dpocrdiewrno5"]
 
 [ext_resource type="Theme" uid="uid://csi604a0328au" path="res://src/theme.tres" id="1_mf8gv"]
+[ext_resource type="Script" path="res://src/Credits.gd" id="2_32q85"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_mf8gv")
+script = ExtResource("2_32q85")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -28,7 +30,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_mf8gv")
-theme_override_font_sizes/font_size = 29
+theme_override_font_sizes/font_size = 27
 text = "Made By:
 
 Vincenzo Gavioli AKA Arctia
@@ -44,3 +46,16 @@ Stefano Rapuano AKA srapuano
 from:
 42RomaLuiss
 Spaghetti Studio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Button" to="." method="change_scene"]

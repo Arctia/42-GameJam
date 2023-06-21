@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b5dgmqqaqyfji"]
+[gd_scene load_steps=21 format=3 uid="uid://b5dgmqqaqyfji"]
 
 [ext_resource type="Script" path="res://HUD/hud.gd" id="1_tiwh4"]
 [ext_resource type="Texture2D" uid="uid://8djg14go0nen" path="res://HUD/Sprite-0002.png" id="1_udfon"]
@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://c3j27c4wmd742" path="res://HUD/Pause-0001.png" id="7_2sne4"]
 [ext_resource type="Texture2D" uid="uid://bjeo3mwxrnigf" path="res://HUD/Pause-0002.png" id="8_cbk61"]
 [ext_resource type="Script" path="res://HUD/PauseButton.gd" id="9_11hk1"]
-[ext_resource type="Texture2D" uid="uid://dbftmol76mbjf" path="res://HUD/RectBar.png" id="10_fer63"]
-[ext_resource type="FontFile" uid="uid://ls1xuryhl6nt" path="res://assets/font/static/Rubik-Bold.ttf" id="11_hiqv0"]
 [ext_resource type="Texture2D" uid="uid://gig3lg8avmak" path="res://HUD/Commands-0001.png" id="12_8ttyq"]
 [ext_resource type="Script" path="res://HUD/MenuButton.gd" id="12_vubqe"]
 [ext_resource type="Texture2D" uid="uid://b5pvxgn565c86" path="res://HUD/Commands-0002.png" id="13_6eqkh"]
@@ -30,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("21_iuj4p")
 script = ExtResource("1_tiwh4")
 
 [node name="Directions" type="CanvasLayer" parent="."]
@@ -157,8 +156,19 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_undse")
 
 [node name="Control" parent="LIFE" instance=ExtResource("15_kl833")]
+unique_name_in_owner = true
 process_mode = 3
 visible = false
+
+[node name="Panel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PauseButton" type="TextureButton" parent="."]
 process_mode = 3
@@ -173,12 +183,15 @@ offset_bottom = 360.0
 grow_horizontal = 0
 scale = Vector2(0.1, 0.1)
 focus_mode = 0
+theme = ExtResource("21_iuj4p")
 texture_normal = ExtResource("7_2sne4")
 texture_pressed = ExtResource("8_cbk61")
 stretch_mode = 4
 script = ExtResource("9_11hk1")
 
-[node name="MenuButton" type="TextureButton" parent="PauseButton"]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -186,71 +199,32 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -2580.0
-offset_top = 2640.0
-offset_right = -2280.0
-offset_bottom = 2790.0
+offset_left = -95.0
+offset_top = -32.0
+offset_right = 95.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(5, 2)
+
+[node name="MenuButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 focus_mode = 0
 action_mode = 0
-texture_normal = ExtResource("10_fer63")
+text = "Title"
 script = ExtResource("12_vubqe")
 
-[node name="Menu" type="Label" parent="PauseButton/MenuButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("11_hiqv0")
-theme_override_font_sizes/font_size = 60
-text = "Menu"
+[node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
 
-[node name="OptionButton" type="TextureButton" parent="PauseButton"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -2580.0
-offset_top = 3840.0
-offset_right = -2280.0
-offset_bottom = 3990.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(5, 2)
+[node name="OptionButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 focus_mode = 0
 action_mode = 0
-texture_normal = ExtResource("10_fer63")
+text = "Options"
 script = ExtResource("14_vv861")
-
-[node name="Option" type="Label" parent="PauseButton/OptionButton"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("11_hiqv0")
-theme_override_font_sizes/font_size = 60
-text = "Option"
 
 [node name="TimerValue" type="Label" parent="."]
 layout_mode = 0
@@ -263,5 +237,5 @@ vertical_alignment = 1
 script = ExtResource("18_kjtwi")
 
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="_on_pressed"]
-[connection signal="pressed" from="PauseButton/MenuButton" to="PauseButton/MenuButton" method="_on_pressed"]
-[connection signal="pressed" from="PauseButton/OptionButton" to="PauseButton/OptionButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButton" to="HBoxContainer/MenuButton" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/OptionButton" to="HBoxContainer/OptionButton" method="_on_pressed"]
