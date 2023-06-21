@@ -19,6 +19,8 @@ noise = SubResource("FastNoiseLite_3u4q0")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y70k8"]
 shader = ExtResource("1_7el0b")
+shader_parameter/damaged = false
+shader_parameter/speed = 30.0
 shader_parameter/noise = SubResource("NoiseTexture2D_skocy")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmren"]
@@ -104,6 +106,7 @@ texture = ExtResource("2_x26s7")
 texture = ExtResource("4_6dmeg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_hmren")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -116,12 +119,14 @@ wait_time = 0.5
 one_shot = true
 
 [node name="FloorChecker" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, 50)
 
 [node name="Area" type="CollisionShape2D" parent="FloorChecker"]
 shape = SubResource("CircleShape2D_nx1jv")
 
 [node name="WorldChecker" type="Area2D" parent="."]
+visible = false
 
 [node name="Area" type="CollisionShape2D" parent="WorldChecker"]
 shape = SubResource("CircleShape2D_ne715")
