@@ -62,7 +62,7 @@ func move(_delta) -> bool:
 			if "ice" in area.name:
 				floor_type = FLR_ICE
 			if "spike" in area.name:
-				material.set_shader_parameter("damaged", !self.invincible)
+				$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
 				_get_hit(spike_damage)
 			if "SuperTramp" in area.name:
 				velocity.y = JUMP * 1.5
@@ -198,4 +198,5 @@ func _get_hit(damage:float) -> void:
 
 func _on_timer_timeout():
 	self.invincible = false
+	$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
 
