@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=21 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cx4w8fo3tm3ss" path="res://assets/BG_scene/bg-00.png" id="5_qofyl"]
 [ext_resource type="AudioStream" uid="uid://dqbxpdjowx64" path="res://Music/Pianata m-9702.mp3" id="6_fea2l"]
 [ext_resource type="AudioStream" uid="uid://btcvv17dw6fnd" path="res://Music/Click.mp3" id="7_f0deo"]
+[ext_resource type="Texture2D" uid="uid://dbmtvgv474vfq" path="res://assets/ember.png" id="8_f4mpb"]
 [ext_resource type="AudioStream" uid="uid://c16xbob7alcxk" path="res://Music/Death.mp3" id="8_ie1cu"]
 [ext_resource type="AudioStream" uid="uid://ccrl6qp1pi7bs" path="res://Music/Fire.mp3" id="9_lhfu7"]
 [ext_resource type="AudioStream" uid="uid://cp7ljwi2ecwbv" path="res://Music/jump.mp3" id="10_phgi5"]
@@ -323,6 +324,30 @@ color = Color(0.0784314, 0.0156863, 0.0470588, 1)
 
 [node name="Game" type="Node2D" parent="."]
 unique_name_in_owner = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Game"]
+position = Vector2(245, 577)
+amount = 40
+lifetime = 15.0
+explosiveness = 0.36
+randomness = 0.51
+lifetime_randomness = 0.43
+texture = ExtResource("8_f4mpb")
+direction = Vector2(0, -1)
+spread = 10.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 300.0
+angular_velocity_min = -32.41
+angular_velocity_max = 46.3
+linear_accel_min = 3.0
+linear_accel_max = 15.0
+damping_min = 5.47
+damping_max = 14.24
+angle_min = -10.0
+angle_max = 10.0
+scale_amount_min = 0.4
+scale_amount_max = 0.8
 
 [node name="GameMap" parent="Game" instance=ExtResource("1_h5cua")]
 position = Vector2(229, 660)
