@@ -237,10 +237,12 @@ dialogue = "no time to see"
 bg_color = Color(0, 0, 0, 0.768627)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("6_fea2l")
 autoplay = true
 
 [node name="Node" type="Node" parent="."]
+process_mode = 3
 
 [node name="click" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("7_f0deo")

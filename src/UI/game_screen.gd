@@ -10,11 +10,11 @@ var intermezzi:Dictionary = {
 	to move around.",
 	2: "There's always a first time
 	to being stitched.",
-	5: "There's always a first time
+	4: "There's always a first time
 	to ice-skate.",
-	7: "There's always a first time
+	5: "There's always a first time
 	to truly jump.",
-	8: "There's always a first time
+	6: "There's always a first time
 	to feel the breeze."
 } 
 
@@ -32,6 +32,13 @@ func _raise_level():
 	if level in intermezzi: 
 		$DialogueControl._play(intermezzi[level])
 		self.get_tree().paused = true
+	if level % 3 == 0:
+		var tween = self.create_tween()
+		tween.tween_property(%ash, "ashes_amount", 100, 0.3)
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_SINE)
+		tween.play()
+		#%ash.ashes_amount = 100.0
 
 # ---------------------------------------------------------------------------- #
 # --- New Level Logic
