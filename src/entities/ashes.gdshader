@@ -1,6 +1,8 @@
 shader_type canvas_item;
 
 uniform sampler2D noise;
+uniform bool damaged = false;
+uniform float speed = 25.;
 
 void fragment() {
 	float angle = TIME;
@@ -13,5 +15,10 @@ void fragment() {
 	coord.x -= .5;
 	coord.y -= .5;
 	vec4 lens_color = texture(TEXTURE, UV + coord.xy);
+	vec4 damage_mask = texture(TEXTURE, UV);
+	damage_mask.a *= 0.5;
+	damage_mask.rgb += 0.5; 
+	if (damaged)
+		lens_color = mix(lens_color, damage_mask, sin(angle * speed));
     COLOR = lens_color;
 }

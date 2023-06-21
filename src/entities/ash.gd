@@ -23,6 +23,8 @@ var idle:float = 0.0
 @export var ashes_full:float = 100000
 #@export var ashes_amount:float = 100000
 
+@export var spike_damage:float = 10.
+
 var gravity:float = ProjectSettings.get_setting("physics/2d/default_gravity") *1.5
 var is_jumping:bool = false : 
 	set(value) :
@@ -60,7 +62,15 @@ func move(_delta) -> bool:
 		for area in worldChecker.get_overlapping_areas():
 			if "ice" in area.name:
 				floor_type = FLR_ICE
-				break
+			if "spike" in area.name:
+				material.set_shader_parameter("damaged", !self.invincible)
+				_get_hit(spike_damage)
+			if "SuperTramp" in area.name:
+				velocity.y = JUMP * 1.5
+				set_deferred("is_jumping",false)
+				area.activate()
+			if "wind" in area.name:
+				velocity.x -= area.speed * area.direction #placeholder
 	else:
 		floor_type = FLR_NORMAL
 	if floor_type == FLR_NORMAL:
