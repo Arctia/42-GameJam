@@ -66,6 +66,66 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HUD:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect3:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect4:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorRect:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ColorRect2:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_svib0"]
 resource_name = "remove_flash"
@@ -121,6 +181,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HUD:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4.8),
+"transitions": PackedFloat32Array(1, 1.46409),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("ColorRect3:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 0.42),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("ColorRect4:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 0.42),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 0.42),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ColorRect2:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 0.42),
+"update": 0,
+"values": [Color(0.0784314, 0.0156863, 0.0470588, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0yilx"]
@@ -281,29 +401,6 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 1
 
-[node name="DialogueControl" parent="." instance=ExtResource("5_e182c")]
-process_mode = 3
-visible = false
-z_index = 2
-custom_minimum_size = Vector2(540, 600)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -18.5
-offset_right = 0.5
-offset_bottom = 18.5
-dialogue = "no time to see"
-bg_color = Color(0, 0, 0, 0.768627)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-process_mode = 3
-stream = ExtResource("6_fea2l")
-autoplay = true
-
 [node name="Node" type="Node" parent="."]
 process_mode = 3
 
@@ -324,10 +421,57 @@ stream = ExtResource("10_phgi5")
 [node name="spine" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("11_52opm")
 
+[node name="DialogueControl" parent="." instance=ExtResource("5_e182c")]
+process_mode = 3
+visible = false
+z_index = 2
+custom_minimum_size = Vector2(540, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -18.5
+offset_right = 0.5
+offset_bottom = 18.5
+dialogue = "no time to see"
+bg_color = Color(0, 0, 0, 0.768627)
+
+[node name="DialogueControl2" parent="." instance=ExtResource("5_e182c")]
+process_mode = 3
+visible = false
+z_index = 2
+custom_minimum_size = Vector2(540, 600)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -18.5
+offset_right = 0.5
+offset_bottom = 18.5
+dialogue = "asd"
+frame_rate = 0.12
+no_bg = true
+bg_color = Color(0, 0, 0, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("6_fea2l")
+autoplay = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_0yilx")
 }
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
 [connection signal="death_signal" from="Game/ash" to="." method="_on_ash_death_signal"]
@@ -336,3 +480,4 @@ libraries = {
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
 [connection signal="respawn_signal" from="Game/ash" to="." method="_on_ash_respawn_signal"]
 [connection signal="finished" from="Node/fire" to="." method="_on_fire_finished"]
+[connection signal="timeout" from="Timer" to="." method="_game_end_game"]

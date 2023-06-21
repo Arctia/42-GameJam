@@ -25,8 +25,9 @@ func _ready():
 	pass
 
 func _process(_dt):
-	#HUD.get_lives(player.lives)
-	HUD.get_ashes(player.ashes_amount)
+	if HUD != null:
+		#HUD.get_lives(player.lives)
+		HUD.get_ashes(player.ashes_amount)
 
 func _raise_level():
 	level += 1
@@ -95,7 +96,9 @@ func _move_game() -> void:
 	ptween.set_trans(Tween.TRANS_SINE)
 	ptween.play()
 	$AnimationPlayer.play("game_end")
-	
+	HUD.queue_free()
+	HUD = null
+	$Timer.start()
 
 func _on_ash_got_hit():
 	$Node/spine.play()
@@ -112,3 +115,13 @@ func _on_ash_respawn_signal():
 
 func _on_ash_game_over():
 	self.get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")
+
+
+func _game_end_game():
+	var dia = "There is always 
+	a first time
+	.  .  .
+	even if it is 
+	the last one"
+	$DialogueControl2._play(dia)
+	$DialogueControl2.visible = true
