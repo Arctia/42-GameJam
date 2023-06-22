@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=24 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bsqsl2llvwpgi" path="res://assets/ash/Eyes8.png" id="7_qud52"]
 [ext_resource type="Texture2D" uid="uid://cmhr01bcbabkq" path="res://assets/ash/Eyes7.png" id="8_eo4f3"]
 [ext_resource type="Texture2D" uid="uid://ch657p2so1abw" path="res://assets/ash/Eyes9.png" id="9_glixh"]
+[ext_resource type="AudioStream" uid="uid://cp7ljwi2ecwbv" path="res://Music/jump.mp3" id="10_kqam5"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3u4q0"]
 frequency = 0.009
@@ -185,6 +186,10 @@ one_shot = true
 
 [node name="Timer3" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_kqam5")
+volume_db = -18.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="FloorChecker" to="." method="_on_floor_checker_body_entered"]

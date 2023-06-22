@@ -75,6 +75,7 @@ func move(_delta) -> bool:
 			if "spike" in area.name:
 				_get_hit(spike_damage)
 			if "SuperTramp" in area.name:
+				play_jump()
 				velocity.y = JUMP * 1.25
 				set_deferred("is_jumping",false)
 				area.activate()
@@ -112,7 +113,9 @@ func jumping(delta) -> void:
 	if Input.is_action_just_pressed("jump") or is_jumping: #and self.ashes_amount > 0: 
 		if is_on_floor():
 			set_deferred("is_jumping", true)
+			play_jump()
 		if is_on_wall_only() and not is_jumping:
+			play_jump()
 			velocity.x = JUMP * get_which_wall_collided() * 3.
 			velocity.y = -abs(velocity.x) / 8.
 			if velocity.x > 0:
@@ -181,6 +184,11 @@ func get_more_ash(value:float) -> void:
 	self.ashes_amount += value
 	if self.ashes_amount > self.ashes_full: self.ashes_amount = self.ashes_full
 	consume_ashes.emit(self.ashes_amount)
+
+func play_jump() -> void:
+	$JumpSFX.stop()
+	$JumpSFX.seek(0.000)
+	$JumpSFX.play()
 
 # ---------------------------------------------------------------------------- #
 # -- Player HP
