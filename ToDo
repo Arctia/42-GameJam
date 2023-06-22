@@ -1,0 +1,17 @@
+
+Important:
+    - Port to Godot 4.1 even if still no out
+
+Missing:
+    - Jump sound
+    - Esc button for pause
+    - Auto Focus on start button, so you can start the game with space
+    - A Game Over screen
+
+Improvements:
+    - Stronger wind
+    - Better player sprite
+    - Fog on higher levels (?) or fire smoke at lower levels
+    - Better parallax on background (precisely last layer should go up instead of down (?)
+
+    - new levels
