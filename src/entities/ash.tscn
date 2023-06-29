@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=25 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
+[ext_resource type="Texture2D" uid="uid://dbmtvgv474vfq" path="res://assets/ember.png" id="2_wyo5f"]
 [ext_resource type="Texture2D" uid="uid://dl5w78wxn1goa" path="res://assets/ash/Ashes-0001.png" id="2_x26s7"]
 [ext_resource type="Texture2D" uid="uid://7x6qeihvyd4w" path="res://assets/ash/Ashes-eyes-0001.png" id="4_6dmeg"]
 [ext_resource type="Texture2D" uid="uid://cxtqp4rs8pv27" path="res://assets/ash/Ashes-eyes-0002.png" id="5_f5adn"]
@@ -118,6 +119,31 @@ colors = PackedColorArray(0.79, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0.458824)
 scale = Vector2(0.5, 0.5)
 floor_stop_on_slope = false
 script = ExtResource("1_ekyna")
+
+[node name="ashes_lost" type="CPUParticles2D" parent="."]
+modulate = Color(0, 0, 0, 0.721569)
+amount = 10
+lifetime = 1.5
+explosiveness = 0.1
+randomness = 0.44
+lifetime_randomness = 0.53
+texture = ExtResource("2_wyo5f")
+emission_shape = 2
+emission_sphere_radius = 20.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+angular_velocity_min = -160.0
+angular_velocity_max = 160.95
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+damping_min = 10.0
+damping_max = 20.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.2
+scale_amount_max = 0.4
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_y70k8")
