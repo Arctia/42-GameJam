@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dbmtvgv474vfq" path="res://assets/ember.png" id="8_f4mpb"]
 [ext_resource type="AudioStream" uid="uid://c16xbob7alcxk" path="res://Music/Death.mp3" id="8_ie1cu"]
 [ext_resource type="AudioStream" uid="uid://ccrl6qp1pi7bs" path="res://Music/Fire.mp3" id="9_lhfu7"]
-[ext_resource type="AudioStream" uid="uid://cp7ljwi2ecwbv" path="res://Music/jump.mp3" id="10_phgi5"]
-[ext_resource type="AudioStream" uid="uid://clc75kma44rr0" path="res://Music/Spine.mp3" id="11_52opm"]
+[ext_resource type="AudioStream" uid="uid://4vbdioniftte" path="res://sounds/sfx/jump.wav" id="13_vr5ji"]
+[ext_resource type="AudioStream" uid="uid://dhqcecgpou4oe" path="res://sounds/sfx/hurt.wav" id="14_8mjyg"]
 
 [sub_resource type="Animation" id="Animation_fw3uj"]
 length = 0.001
@@ -554,10 +554,11 @@ volume_db = -3.0
 autoplay = true
 
 [node name="jump" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource("10_phgi5")
+stream = ExtResource("13_vr5ji")
 
 [node name="spine" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource("11_52opm")
+stream = ExtResource("14_8mjyg")
+volume_db = -4.654
 
 [node name="DialogueControl" parent="." instance=ExtResource("5_e182c")]
 process_mode = 3
