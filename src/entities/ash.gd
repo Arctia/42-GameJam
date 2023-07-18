@@ -234,7 +234,7 @@ var ashes_amount:float = 100.0
 var status:String = "active"
 var invincible:bool = false
 var died:bool = false
-var deactivate:bool = false
+@export var deactivate:bool = false
 
 func _consume(dt) -> void:
 	if self.ashes_amount > 0: 

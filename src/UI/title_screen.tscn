@@ -208,6 +208,7 @@ position = Vector2(245, 605)
 scale = Vector2(1.3, 1.3)
 MAX_SPEED = 0.0
 JUMP = 0.0
+deactivate = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
