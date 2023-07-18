@@ -17,7 +17,7 @@ void fragment() {
 	vec4 lens_color = texture(TEXTURE, UV + coord.xy);
 	vec4 damage_mask = texture(TEXTURE, UV);
 	damage_mask.a *= 0.5;
-	damage_mask.rgb += 0.5; 
+	damage_mask.r += 0.5; 
 	if (damaged)
 		lens_color = mix(lens_color, damage_mask, sin(angle * speed));
     COLOR = lens_color;
