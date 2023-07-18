@@ -12,6 +12,12 @@ var dialogue_count:int = 0
 var dialogue_writing:bool = false
 
 func _ready():
+	if Game.hard_mode or Game.god_mode:
+		dialogues.append("What we have here?..")
+		dialogues.append("A fragile ash...")
+	if Game.god_mode:
+		dialogues.append("... Still here?")
+		dialogues.append("Fine then, prepare for your next nightmare")
 	_on_btn_forward_pressed()
 
 func _input(event):
