@@ -48,17 +48,44 @@ func _ready():
 func _physics_process(delta):
 	if self.deactivate: return
 	if self.death_check(): return
-	self.move(delta)
+	
+	if OS.get_name() != 'Android': self.move(delta)
+#	else: self.move_phone(delta)
 	if self.deactivate: return
 	self._consume(delta)
-	self.jumping(delta)
+	if OS.get_name() != 'Android': self.jumping(delta)
+#	else: self.jumping_phone(delta)
 	self.ducking()
 	self.check_anim()
 	self.rotating(delta)
 	move_and_slide()
 
+var btn_xaxis : int = 0
+var btn_yaxis : int = 0
+
+func set_btn_xaxis(val:int) -> void:
+	btn_xaxis = val
+
+func set_btn_yaxis(val:int) -> void:
+	btn_yaxis = val
+
+func detect_movement() -> int:
+	var movement = btn_xaxis
+	if btn_xaxis == 0:
+		movement = Input.get_axis("move_left", "move_right")
+	return movement
+
+func detect_jumping() -> int:
+	var movement = btn_yaxis
+	if btn_yaxis == 0:
+		movement = Input.is_action_pressed("jump")
+	if not movement and Input.is_action_pressed("duck"):
+		movement = -1
+	return movement
+
 func move(_delta) -> bool:
 	@warning_ignore("narrowing_conversion")
+#	xaxis = detect_movement()
 	xaxis = Input.get_axis("move_left", "move_right")
 	
 	var curr_acc = ACC
@@ -267,3 +294,7 @@ func _on_timer_2_timeout():
 
 func _game_over():
 	game_over.emit()
+
+
+func _on_gamebuttons_btn_xaxis(val):
+	pass # Replace with function body.

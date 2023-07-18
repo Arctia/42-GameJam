@@ -5,7 +5,7 @@ var dialogues:Array = [
 #	"Your being is simple yet majestic.",
 #	Raise and fill your
 #	reality.",
-	"Go higher and higher.",
+	"Go higher and higher",
 	"That's where you do belong"]
 
 var dialogue_count:int = 0

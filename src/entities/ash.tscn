@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=26 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
@@ -97,10 +97,27 @@ tracks/0/keys = {
 "values": [ExtResource("4_6dmeg")]
 }
 
+[sub_resource type="Animation" id="Animation_pdwp0"]
+resource_name = "LookAtMe"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyes:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_qud52"), ExtResource("7_qud52")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rm0wr"]
 _data = {
 "Close_Eyes": SubResource("Animation_1qigu"),
 "Idle": SubResource("Animation_80axr"),
+"LookAtMe": SubResource("Animation_pdwp0"),
 "Open_Eyes": SubResource("Animation_wgtd8"),
 "RESET": SubResource("Animation_ll61v")
 }

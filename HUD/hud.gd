@@ -38,3 +38,11 @@ func reset_time():
 
 func get_time():
 	return $TimerValue.text
+
+
+func set_btn_xaxis(val):
+	pass # Replace with function body.
+
+
+func set_btn_yaxis(val):
+	pass # Replace with function body.

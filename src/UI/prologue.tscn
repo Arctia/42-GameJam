@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://ch4k1a78wknv8"]
 
-[ext_resource type="Script" path="res://src/UI/beginning.gd" id="1_6mcqy"]
-[ext_resource type="PackedScene" uid="uid://cxg4t871uddd" path="res://src/UI/dialogue_control.tscn" id="1_74ini"]
-[ext_resource type="Theme" uid="uid://csi604a0328au" path="res://src/theme.tres" id="1_irhgp"]
+[ext_resource type="Theme" uid="uid://csi604a0328au" path="res://src/theme.tres" id="1_gdg6s"]
+[ext_resource type="Script" path="res://src/UI/prologue.gd" id="2_upwte"]
+[ext_resource type="PackedScene" uid="uid://cxg4t871uddd" path="res://src/UI/dialogue_control.tscn" id="3_fba10"]
 
 [sub_resource type="Animation" id="Animation_bmg7n"]
 length = 0.001
@@ -65,17 +65,17 @@ _data = {
 "flashing": SubResource("Animation_b1aw6")
 }
 
-[node name="Beginning" type="Control"]
+[node name="Prologue" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_irhgp")
-script = ExtResource("1_6mcqy")
+theme = ExtResource("1_gdg6s")
+script = ExtResource("2_upwte")
 
-[node name="DialogueControl" parent="." instance=ExtResource("1_74ini")]
+[node name="DialogueControl" parent="." instance=ExtResource("3_fba10")]
 custom_minimum_size = Vector2(429, 818)
 layout_mode = 1
 anchors_preset = 8
@@ -118,6 +118,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1

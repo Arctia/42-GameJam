@@ -438,7 +438,7 @@ stream = ExtResource("11_52opm")
 process_mode = 3
 visible = false
 z_index = 2
-custom_minimum_size = Vector2(540, 600)
+custom_minimum_size = Vector2(540, 900)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -492,6 +492,10 @@ one_shot = true
 [connection signal="game_over" from="Game/ash" to="." method="_on_ash_game_over"]
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
 [connection signal="respawn_signal" from="Game/ash" to="." method="_on_ash_respawn_signal"]
+[connection signal="btn_xaxis" from="HUD/gamebuttons" to="Game/ash" method="set_btn_xaxis"]
+[connection signal="btn_yaxis" from="HUD/gamebuttons" to="Game/ash" method="set_btn_yaxis"]
 [connection signal="finished" from="Node/fire" to="." method="_on_fire_finished"]
 [connection signal="exited" from="DialogueControl2" to="." method="_on_dialogue_control_2_exited"]
 [connection signal="timeout" from="Timer" to="." method="_game_end_game"]
+
+[editable path="HUD"]
