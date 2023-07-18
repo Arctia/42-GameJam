@@ -44,6 +44,7 @@ var floor_type = FLR_NORMAL
 
 func _ready():
 	FRICTION = ACC
+	if Game.god_mode: self.lives = 1
 
 func _physics_process(delta):
 	if self.deactivate: return
@@ -246,6 +247,7 @@ func _get_hit(damage:float) -> void:
 	if not invincible:
 		$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
 		ashes_amount -= damage
+		if Game.hard_mode or Game.god_mode: ashes_amount = 0
 		self.invincible = true
 		$Timer.start(self.inv_time)
 		got_hit.emit()

@@ -127,7 +127,11 @@ func _on_ash_death_signal():
 func _on_ash_respawn_signal():
 	%ash.position = self.last_checkpoint
 
+# dissolve to game over
 func _on_ash_game_over():
+	$AnimationPlayer.play("GameOver")
+
+func _back_to_title():
 	self.get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")
 
 var timestamp_endgame:String
@@ -145,7 +149,6 @@ func _game_end_game():
 var inte:int = 0
 
 func _on_dialogue_control_2_exited():
-	print("hi")
 	if inte == 0:
 		$DialogueControl2.process_mode = Node.PROCESS_MODE_INHERIT
 		var dia = "Congratulations
@@ -157,3 +160,8 @@ func _on_dialogue_control_2_exited():
 		inte = 1
 	else:
 		get_tree().change_scene_to_file("res://src/Credits.tscn")
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "GameOver":
+		_back_to_title()
