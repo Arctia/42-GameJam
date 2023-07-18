@@ -294,7 +294,3 @@ func _on_timer_2_timeout():
 
 func _game_over():
 	game_over.emit()
-
-
-func _on_gamebuttons_btn_xaxis(val):
-	pass # Replace with function body.

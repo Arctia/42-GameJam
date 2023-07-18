@@ -22,6 +22,7 @@ func _ready():
 	$AnimationPlayer.play("remove_flash")
 	HUD.get_lives(player.lives)
 	HUD.reset_time()
+	Game.pausable = true
 	#_to_new_level(Vector2.ZERO, 9)
 	#pass
 
@@ -35,6 +36,7 @@ func _raise_level():
 	if level in intermezzi: 
 		$DialogueControl._play(intermezzi[level])
 		self.get_tree().paused = true
+		
 	if level % 3 == 0:
 		var tween = self.create_tween()
 		tween.tween_property(%ash, "ashes_amount", 100, 0.3)
