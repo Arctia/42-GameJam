@@ -24,7 +24,7 @@ offset_bottom = 305.0
 color = Color(0.262932, 0.262932, 0.262932, 1)
 
 [node name="firecamp" parent="." instance=ExtResource("2_kvexj")]
-position = Vector2(88, -115)
+position = Vector2(84, -74)
 scale = Vector2(0.75, 0.75)
 
 [node name="levels" parent="." instance=ExtResource("1_2hlv0")]

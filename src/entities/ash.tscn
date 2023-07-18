@@ -142,8 +142,8 @@ damping_min = 10.0
 damping_max = 20.0
 angle_min = -180.0
 angle_max = 180.0
-scale_amount_min = 0.2
-scale_amount_max = 0.4
+scale_amount_min = 0.35
+scale_amount_max = 0.6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_y70k8")
