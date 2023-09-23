@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://8d7lx82ts0ee"]
+[gd_scene load_steps=22 format=3 uid="uid://8d7lx82ts0ee"]
 
 [ext_resource type="Script" path="res://src/UI/game_screen.gd" id="1_3i20e"]
 [ext_resource type="PackedScene" uid="uid://gq31pe1i22pf" path="res://src/UI/game_map.tscn" id="1_h5cua"]
@@ -14,8 +14,72 @@
 [ext_resource type="Texture2D" uid="uid://dbmtvgv474vfq" path="res://assets/ember.png" id="8_f4mpb"]
 [ext_resource type="AudioStream" uid="uid://c16xbob7alcxk" path="res://Music/Death.mp3" id="8_ie1cu"]
 [ext_resource type="AudioStream" uid="uid://ccrl6qp1pi7bs" path="res://Music/Fire.mp3" id="9_lhfu7"]
-[ext_resource type="AudioStream" uid="uid://cp7ljwi2ecwbv" path="res://Music/jump.mp3" id="10_phgi5"]
-[ext_resource type="AudioStream" uid="uid://clc75kma44rr0" path="res://Music/Spine.mp3" id="11_52opm"]
+[ext_resource type="AudioStream" uid="uid://4vbdioniftte" path="res://sounds/sfx/jump.wav" id="13_vr5ji"]
+[ext_resource type="AudioStream" uid="uid://dhqcecgpou4oe" path="res://sounds/sfx/hurt.wav" id="14_8mjyg"]
+
+[sub_resource type="Animation" id="Animation_4tu3b"]
+resource_name = "GameOver"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOverRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0.0784314, 0.0156863, 0.0470588, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOverRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HUD/LIFE:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node/fire:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-3.0, -30.0]
+}
 
 [sub_resource type="Animation" id="Animation_fw3uj"]
 length = 0.001
@@ -114,6 +178,66 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.0784314, 0.0156863, 0.0470588, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("GameOverRect:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("GameOverRect:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("HUD/LIFE:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Node/fire:volume_db")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-3.0]
 }
 
 [sub_resource type="Animation" id="Animation_cd4ad"]
@@ -234,6 +358,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0yilx"]
 _data = {
+"GameOver": SubResource("Animation_4tu3b"),
 "RESET": SubResource("Animation_fw3uj"),
 "game_end": SubResource("Animation_cd4ad"),
 "remove_flash": SubResource("Animation_svib0")
@@ -354,7 +479,7 @@ position = Vector2(229, 660)
 
 [node name="ash" parent="Game" instance=ExtResource("2_w1o6o")]
 unique_name_in_owner = true
-position = Vector2(418, 549)
+position = Vector2(244, 583)
 floor_max_angle = 0.349066
 floor_snap_length = 0.1
 vs_wind = 15.0
@@ -414,6 +539,9 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 1
 
+[node name="gamebuttons" parent="HUD" index="6"]
+visible = false
+
 [node name="Node" type="Node" parent="."]
 process_mode = 3
 
@@ -429,16 +557,17 @@ volume_db = -3.0
 autoplay = true
 
 [node name="jump" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource("10_phgi5")
+stream = ExtResource("13_vr5ji")
 
 [node name="spine" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource("11_52opm")
+stream = ExtResource("14_8mjyg")
+volume_db = -4.654
 
 [node name="DialogueControl" parent="." instance=ExtResource("5_e182c")]
 process_mode = 3
 visible = false
 z_index = 2
-custom_minimum_size = Vector2(540, 600)
+custom_minimum_size = Vector2(540, 900)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -451,6 +580,7 @@ offset_right = 0.5
 offset_bottom = 18.5
 dialogue = "no time to see"
 bg_color = Color(0, 0, 0, 0.768627)
+is_active = false
 
 [node name="DialogueControl2" parent="." instance=ExtResource("5_e182c")]
 process_mode = 4
@@ -471,6 +601,7 @@ dialogue = "asd"
 frame_rate = 0.12
 no_bg = true
 bg_color = Color(0, 0, 0, 0)
+is_active = false
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -486,12 +617,24 @@ libraries = {
 wait_time = 5.0
 one_shot = true
 
+[node name="GameOverRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 501.0
+offset_bottom = 859.0
+color = Color(1, 1, 1, 0)
+
 [connection signal="new_level" from="Game/GameMap" to="." method="_to_new_level"]
 [connection signal="death_signal" from="Game/ash" to="." method="_on_ash_death_signal"]
 [connection signal="game_end" from="Game/ash" to="." method="_move_game"]
 [connection signal="game_over" from="Game/ash" to="." method="_on_ash_game_over"]
 [connection signal="got_hit" from="Game/ash" to="." method="_on_ash_got_hit"]
 [connection signal="respawn_signal" from="Game/ash" to="." method="_on_ash_respawn_signal"]
+[connection signal="btn_xaxis" from="HUD/gamebuttons" to="Game/ash" method="set_btn_xaxis"]
+[connection signal="btn_yaxis" from="HUD/gamebuttons" to="Game/ash" method="set_btn_yaxis"]
 [connection signal="finished" from="Node/fire" to="." method="_on_fire_finished"]
 [connection signal="exited" from="DialogueControl2" to="." method="_on_dialogue_control_2_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_game_end_game"]
+
+[editable path="HUD"]

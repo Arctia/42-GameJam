@@ -1,6 +1,10 @@
 extends TextureButton
 
-# Called when the node enters the scene tree for the first time.
+func _input(event):
+	if event.is_action_pressed("pause"): 
+		if Game.is_pausable():
+			_on_pressed()
+
 func _on_pressed():
 	if get_tree().paused == false:
 		%Panel.visible = true

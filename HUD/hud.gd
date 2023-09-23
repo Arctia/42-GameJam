@@ -38,3 +38,6 @@ func reset_time():
 
 func get_time():
 	return $TimerValue.text
+
+func get_time_secs() -> int:
+	return int($TimerValue.time)

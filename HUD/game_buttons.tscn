@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3 uid="uid://dksgku340jqq7"]
+
+[ext_resource type="Script" path="res://HUD/game_buttons.gd" id="1_k5qjs"]
+
+[node name="gamebuttons" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 160)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_k5qjs")
+
+[node name="SplitContainer2" type="SplitContainer" parent="."]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[node name="left" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "left"
+
+[node name="SplitContainer" type="SplitContainer" parent="."]
+custom_minimum_size = Vector2(13, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+
+[node name="up" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+text = "jump"
+
+[node name="down" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 0
+text = "down"
+
+[node name="SplitContainer3" type="SplitContainer" parent="."]
+custom_minimum_size = Vector2(13, 0)
+layout_mode = 2
+
+[node name="right" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "right"
+
+[node name="SplitContainer4" type="SplitContainer" parent="."]
+custom_minimum_size = Vector2(7, 0)
+layout_mode = 2
+
+[connection signal="button_down" from="left" to="." method="_on_xaxis_btn" binds= [-1]]
+[connection signal="button_up" from="left" to="." method="_on_xaxis_btn" binds= [0]]
+[connection signal="button_down" from="VBoxContainer/up" to="." method="_on_yaxis_btn" binds= [1]]
+[connection signal="button_up" from="VBoxContainer/up" to="." method="_on_yaxis_btn" binds= [0]]
+[connection signal="button_down" from="VBoxContainer/down" to="." method="_on_yaxis_btn" binds= [-1]]
+[connection signal="button_up" from="VBoxContainer/down" to="." method="_on_yaxis_btn" binds= [0]]
+[connection signal="button_down" from="right" to="." method="_on_xaxis_btn" binds= [1]]
+[connection signal="button_up" from="right" to="." method="_on_xaxis_btn" binds= [0]]

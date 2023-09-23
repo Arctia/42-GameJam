@@ -10,6 +10,7 @@ signal exited
 @export var bg_color:Color = "#14040c"
 @export var btn_disabled:bool = false
 @export var sequential:bool = false
+@export var is_active:bool = true
 
 var sec:float = 0
 var i:int = 0
@@ -39,6 +40,7 @@ func _play(dia:String) -> void:
 	if not self.btn_disabled:
 		$Button.visible = true
 		$Button.disabled = false
+	Game.pausable = false
 	self.reset(dia)
 
 func reset(dia:String) -> void:
@@ -46,12 +48,15 @@ func reset(dia:String) -> void:
 	self.text = ""
 	self.i = 0
 	self.sec = 0
+	self.is_active = true
+	
 
 func skip() -> void:
 	self.text = dialogue
 	reach_the_end.emit()
 
 func _input(event):
+	if not self.is_active: return
 	if not sequential:
 		if (event.is_action_pressed("jump")):
 			_on_button_pressed()
@@ -66,3 +71,5 @@ func _on_button_pressed():
 		$Button.visible = false
 		self.get_tree().paused = false
 		exited.emit()
+		self.is_active = false
+		Game.pausable = true

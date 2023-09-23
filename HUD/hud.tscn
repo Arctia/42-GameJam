@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b5dgmqqaqyfji"]
+[gd_scene load_steps=22 format=3 uid="uid://b5dgmqqaqyfji"]
 
 [ext_resource type="Script" path="res://HUD/hud.gd" id="1_tiwh4"]
 [ext_resource type="Texture2D" uid="uid://8djg14go0nen" path="res://HUD/Sprite-0002.png" id="1_udfon"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://cg52sujci6iqw" path="res://src/Volumslider.tscn" id="15_kl833"]
 [ext_resource type="Texture2D" uid="uid://dco75qrxc3s0o" path="res://HUD/Commands-0005.png" id="16_nop38"]
 [ext_resource type="Script" path="res://HUD/TimerValue.gd" id="18_kjtwi"]
+[ext_resource type="PackedScene" uid="uid://dksgku340jqq7" path="res://HUD/game_buttons.tscn" id="21_1dtya"]
 [ext_resource type="Theme" uid="uid://csi604a0328au" path="res://src/theme.tres" id="21_iuj4p"]
 
 [node name="HUD" type="Control"]
@@ -32,6 +33,7 @@ theme = ExtResource("21_iuj4p")
 script = ExtResource("1_tiwh4")
 
 [node name="Directions" type="CanvasLayer" parent="."]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Base" type="TextureRect" parent="Directions"]
@@ -235,6 +237,10 @@ theme = ExtResource("21_iuj4p")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("18_kjtwi")
+
+[node name="gamebuttons" parent="." instance=ExtResource("21_1dtya")]
+layout_mode = 1
+offset_top = -74.0
 
 [connection signal="pressed" from="PauseButton" to="PauseButton" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/MenuButton" to="HBoxContainer/MenuButton" method="_on_pressed"]

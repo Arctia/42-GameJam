@@ -22,6 +22,7 @@ func _ready():
 	$AnimationPlayer.play("remove_flash")
 	HUD.get_lives(player.lives)
 	HUD.reset_time()
+	Game.pausable = true
 	#_to_new_level(Vector2.ZERO, 9)
 	#pass
 
@@ -35,6 +36,7 @@ func _raise_level():
 	if level in intermezzi: 
 		$DialogueControl._play(intermezzi[level])
 		self.get_tree().paused = true
+		
 	if level % 3 == 0:
 		var tween = self.create_tween()
 		tween.tween_property(%ash, "ashes_amount", 100, 0.3)
@@ -86,6 +88,7 @@ func _move_background() -> void:
 
 func _move_game() -> void:
 	timestamp_endgame = HUD.get_time()
+	Game._beat_game_record(HUD.get_time_secs())
 	var tween = self.create_tween()
 	tween.tween_property(%Game, "position:x", %Game.position.x - 530, 1.8)
 	tween.set_ease(Tween.EASE_IN)
@@ -125,7 +128,11 @@ func _on_ash_death_signal():
 func _on_ash_respawn_signal():
 	%ash.position = self.last_checkpoint
 
+# dissolve to game over
 func _on_ash_game_over():
+	$AnimationPlayer.play("GameOver")
+
+func _back_to_title():
 	self.get_tree().change_scene_to_file("res://src/UI/title_screen.tscn")
 
 var timestamp_endgame:String
@@ -143,7 +150,6 @@ func _game_end_game():
 var inte:int = 0
 
 func _on_dialogue_control_2_exited():
-	print("hi")
 	if inte == 0:
 		$DialogueControl2.process_mode = Node.PROCESS_MODE_INHERIT
 		var dia = "Congratulations
@@ -155,3 +161,8 @@ func _on_dialogue_control_2_exited():
 		inte = 1
 	else:
 		get_tree().change_scene_to_file("res://src/Credits.tscn")
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "GameOver":
+		_back_to_title()

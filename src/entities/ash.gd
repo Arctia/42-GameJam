@@ -44,21 +44,49 @@ var floor_type = FLR_NORMAL
 
 func _ready():
 	FRICTION = ACC
+	if Game.god_mode: self.lives = 1
 
 func _physics_process(delta):
 	if self.deactivate: return
 	if self.death_check(): return
-	self.move(delta)
+	
+	if OS.get_name() != 'Android': self.move(delta)
+#	else: self.move_phone(delta)
 	if self.deactivate: return
 	self._consume(delta)
-	self.jumping(delta)
+	if OS.get_name() != 'Android': self.jumping(delta)
+#	else: self.jumping_phone(delta)
 	self.ducking()
 	self.check_anim()
 	self.rotating(delta)
 	move_and_slide()
 
+var btn_xaxis : int = 0
+var btn_yaxis : int = 0
+
+func set_btn_xaxis(val:int) -> void:
+	btn_xaxis = val
+
+func set_btn_yaxis(val:int) -> void:
+	btn_yaxis = val
+
+func detect_movement() -> int:
+	var movement = btn_xaxis
+	if btn_xaxis == 0:
+		movement = Input.get_axis("move_left", "move_right")
+	return movement
+
+func detect_jumping() -> int:
+	var movement = btn_yaxis
+	if btn_yaxis == 0:
+		movement = Input.is_action_pressed("jump")
+	if not movement and Input.is_action_pressed("duck"):
+		movement = -1
+	return movement
+
 func move(_delta) -> bool:
 	@warning_ignore("narrowing_conversion")
+#	xaxis = detect_movement()
 	xaxis = Input.get_axis("move_left", "move_right")
 	
 	var curr_acc = ACC
@@ -75,6 +103,7 @@ func move(_delta) -> bool:
 			if "spike" in area.name:
 				_get_hit(spike_damage)
 			if "SuperTramp" in area.name:
+				play_jump()
 				velocity.y = JUMP * 1.25
 				set_deferred("is_jumping",false)
 				area.activate()
@@ -112,7 +141,9 @@ func jumping(delta) -> void:
 	if Input.is_action_just_pressed("jump") or is_jumping: #and self.ashes_amount > 0: 
 		if is_on_floor():
 			set_deferred("is_jumping", true)
+			play_jump()
 		if is_on_wall_only() and not is_jumping:
+			play_jump()
 			velocity.x = JUMP * get_which_wall_collided() * 3.
 			velocity.y = -abs(velocity.x) / 8.
 			if velocity.x > 0:
@@ -182,6 +213,11 @@ func get_more_ash(value:float) -> void:
 	if self.ashes_amount > self.ashes_full: self.ashes_amount = self.ashes_full
 	consume_ashes.emit(self.ashes_amount)
 
+func play_jump() -> void:
+	$JumpSFX.stop()
+	$JumpSFX.seek(0.000)
+	$JumpSFX.play()
+
 # ---------------------------------------------------------------------------- #
 # -- Player HP
 
@@ -199,7 +235,7 @@ var ashes_amount:float = 100.0
 var status:String = "active"
 var invincible:bool = false
 var died:bool = false
-var deactivate:bool = false
+@export var deactivate:bool = false
 
 func _consume(dt) -> void:
 	if self.ashes_amount > 0: 
@@ -211,6 +247,7 @@ func _get_hit(damage:float) -> void:
 	if not invincible:
 		$Sprite2D.material.set_shader_parameter("damaged", !self.invincible)
 		ashes_amount -= damage
+		if Game.hard_mode or Game.god_mode: ashes_amount = 0
 		self.invincible = true
 		$Timer.start(self.inv_time)
 		got_hit.emit()

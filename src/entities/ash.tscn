@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://x8ukfuvvqph"]
+[gd_scene load_steps=26 format=3 uid="uid://x8ukfuvvqph"]
 
 [ext_resource type="Shader" path="res://src/entities/ashes.gdshader" id="1_7el0b"]
 [ext_resource type="Script" path="res://src/entities/ash.gd" id="1_ekyna"]
+[ext_resource type="Texture2D" uid="uid://dbmtvgv474vfq" path="res://assets/ember.png" id="2_wyo5f"]
 [ext_resource type="Texture2D" uid="uid://dl5w78wxn1goa" path="res://assets/ash/Ashes-0001.png" id="2_x26s7"]
 [ext_resource type="Texture2D" uid="uid://7x6qeihvyd4w" path="res://assets/ash/Ashes-eyes-0001.png" id="4_6dmeg"]
 [ext_resource type="Texture2D" uid="uid://cxtqp4rs8pv27" path="res://assets/ash/Ashes-eyes-0002.png" id="5_f5adn"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bsqsl2llvwpgi" path="res://assets/ash/Eyes8.png" id="7_qud52"]
 [ext_resource type="Texture2D" uid="uid://cmhr01bcbabkq" path="res://assets/ash/Eyes7.png" id="8_eo4f3"]
 [ext_resource type="Texture2D" uid="uid://ch657p2so1abw" path="res://assets/ash/Eyes9.png" id="9_glixh"]
+[ext_resource type="AudioStream" uid="uid://4vbdioniftte" path="res://sounds/sfx/jump.wav" id="11_q88ul"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3u4q0"]
 frequency = 0.009
@@ -23,7 +25,7 @@ noise = SubResource("FastNoiseLite_3u4q0")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y70k8"]
 shader = ExtResource("1_7el0b")
 shader_parameter/damaged = false
-shader_parameter/speed = 5.0
+shader_parameter/speed = 6.0
 shader_parameter/noise = SubResource("NoiseTexture2D_skocy")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hmren"]
@@ -64,6 +66,22 @@ tracks/0/keys = {
 "values": [ExtResource("7_qud52"), ExtResource("8_eo4f3"), ExtResource("7_qud52"), ExtResource("9_glixh"), ExtResource("7_qud52")]
 }
 
+[sub_resource type="Animation" id="Animation_pdwp0"]
+resource_name = "LookAtMe"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Eyes:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("7_qud52"), ExtResource("7_qud52")]
+}
+
 [sub_resource type="Animation" id="Animation_wgtd8"]
 resource_name = "Open_Eyes"
 length = 0.4
@@ -99,6 +117,7 @@ tracks/0/keys = {
 _data = {
 "Close_Eyes": SubResource("Animation_1qigu"),
 "Idle": SubResource("Animation_80axr"),
+"LookAtMe": SubResource("Animation_pdwp0"),
 "Open_Eyes": SubResource("Animation_wgtd8"),
 "RESET": SubResource("Animation_ll61v")
 }
@@ -117,6 +136,31 @@ colors = PackedColorArray(0.79, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0.458824)
 scale = Vector2(0.5, 0.5)
 floor_stop_on_slope = false
 script = ExtResource("1_ekyna")
+
+[node name="ashes_lost" type="CPUParticles2D" parent="."]
+modulate = Color(0, 0, 0, 0.721569)
+amount = 10
+lifetime = 1.5
+explosiveness = 0.1
+randomness = 0.44
+lifetime_randomness = 0.53
+texture = ExtResource("2_wyo5f")
+emission_shape = 2
+emission_sphere_radius = 20.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+angular_velocity_min = -160.0
+angular_velocity_max = 160.95
+radial_accel_min = -5.0
+radial_accel_max = 5.0
+damping_min = 10.0
+damping_max = 20.0
+angle_min = -180.0
+angle_max = 180.0
+scale_amount_min = 0.35
+scale_amount_max = 0.6
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_y70k8")
@@ -185,6 +229,10 @@ one_shot = true
 
 [node name="Timer3" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_q88ul")
+volume_db = -8.751
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="FloorChecker" to="." method="_on_floor_checker_body_entered"]
