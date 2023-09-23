@@ -88,6 +88,7 @@ func _move_background() -> void:
 
 func _move_game() -> void:
 	timestamp_endgame = HUD.get_time()
+	Game._beat_game_record(HUD.get_time_secs())
 	var tween = self.create_tween()
 	tween.tween_property(%Game, "position:x", %Game.position.x - 530, 1.8)
 	tween.set_ease(Tween.EASE_IN)

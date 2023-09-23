@@ -254,8 +254,9 @@ offset_right = -305.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="btn_start_game" type="Button" parent="CenterContainer2"]
+[node name="btn_hard_game" type="Button" parent="CenterContainer2"]
 process_mode = 3
+visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 text = "HARD"
@@ -273,8 +274,9 @@ offset_top = -136.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="btn_start_game" type="Button" parent="CenterContainer3"]
+[node name="btn_soot_game" type="Button" parent="CenterContainer3"]
 process_mode = 3
+visible = false
 custom_minimum_size = Vector2(120, 80)
 layout_mode = 2
 text = "SOOT"
@@ -353,7 +355,7 @@ libraries = {
 stream = ExtResource("5_e1kme")
 autoplay = true
 
-[connection signal="pressed" from="CenterContainer/btn_start_game" to="." method="_start_game"]
-[connection signal="pressed" from="CenterContainer2/btn_start_game" to="." method="_start_game" binds= [1]]
-[connection signal="pressed" from="CenterContainer3/btn_start_game" to="." method="_start_game" binds= [2]]
+[connection signal="pressed" from="CenterContainer/btn_start_game" to="." method="_start_game" binds= [0]]
+[connection signal="pressed" from="CenterContainer2/btn_hard_game" to="." method="_start_game" binds= [1]]
+[connection signal="pressed" from="CenterContainer3/btn_soot_game" to="." method="_start_game" binds= [2]]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
